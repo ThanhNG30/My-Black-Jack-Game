@@ -114,9 +114,7 @@ function bet() {
       alert("Sorry, you cannot bet anymore.");
     }
   });
-  document.getElementById("doneBetting").addEventListener("click", function () {
-    alert(`You have bet ${betAmount} dollars! Let's play!`);
-  });
+  alert(`You have bet ${betAmount} dollars! Let's play!`);
 }
 
 function checkBalance() {
