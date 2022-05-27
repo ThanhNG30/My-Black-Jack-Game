@@ -32,8 +32,11 @@ function bankAccount() {
 }
 
 function bet() {
-  alert("Click on the chip for how much you want to bet.");
-  updateBetAmount();
+  if (betAmount == 0) {
+    alert("Click on the chip for how much you want to bet.");
+    updateBetAmount();
+  }
+
   tenChip.addEventListener("click", function () {
     if (canBet && betAmount == 0) {
       checkBalance();
@@ -114,7 +117,15 @@ function bet() {
       alert("Sorry, you cannot bet anymore.");
     }
   });
-  alert(`You have bet ${betAmount} dollars! Let's play!`);
+  document.getElementById("doneBetting").addEventListener("click", function () {
+    if (betAmount == 0) {
+      alert(
+        "You have not bet. Click on the chip for how much you want to bet."
+      );
+    } else {
+      alert(`You have bet ${betAmount} dollars! Let's play!`);
+    }
+  });
 }
 
 function checkBalance() {

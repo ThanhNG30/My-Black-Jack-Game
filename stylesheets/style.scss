@@ -54,3 +54,13 @@ body {
 #betMoney {
   color: white;
 }
+
+.bank-account > button {
+  background-color: transparent;
+  border: none;
+  // padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.2rem;
+}
