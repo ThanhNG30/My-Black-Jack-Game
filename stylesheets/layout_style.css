@@ -1,0 +1,30 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-image: radial-gradient(#40b040, #029802, #007200);
+  height: 100vh;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.cards {
+  height: 30px;
+  width: 275px;
+  padding-top: 100px;
+  display: -ms-grid;
+  display: grid;
+  /*grid-auto-rows: minmax(150px, auto);*/
+  -ms-grid-rows: (minmax(200px, auto))[2];
+      grid-template-rows: repeat(2, minmax(200px, auto));
+  /*grid-row-gap: 10px;
+			grid-column-gap: 10px;*/
+  row-gap: 150px;
+  max-width: 960px;
+  margin: auto;
+}
+
+.cards > div > img {
+  height: 180px;
+  padding: 5px;
+}
+/*# sourceMappingURL=layout_style.css.map */
