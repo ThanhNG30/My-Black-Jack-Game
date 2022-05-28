@@ -1,3 +1,5 @@
+import * as bet from "./bet.js";
+
 var dealerSum = 0;
 var yourSum = 0;
 
@@ -10,12 +12,15 @@ var deck;
 var canHit = true; //allows the player (you) to draw while yourSum <= 21
 var canSplit = false; //only allow the player (you) to split when they have 2 of the same value
 
-
-
 window.onload = function () {
   buildDeck();
   shuffleDeck();
-  startGame();
+  if (bet.start == true) {
+    startGame();
+  } else {
+    alert("Bet money to start game.");
+  }
+
   // debugger;
 };
 
@@ -57,8 +62,6 @@ function shuffleDeck() {
 }
 
 function startGame() {
-  bankAccount();
-  bet();
   hidden = deck.pop();
   dealerSum += getValue(hidden);
   dealerAceCount += checkAce(hidden);
@@ -87,6 +90,7 @@ function startGame() {
   console.log(yourSum);
   document.getElementById("hit").addEventListener("click", hit);
   document.getElementById("stay").addEventListener("click", stay);
+  document.getElementById("split").addEventListener("click", split);
 }
 
 function hit() {
@@ -163,4 +167,24 @@ function reduceAce(playerSum, playerAceCount) {
   return playerSum;
 }
 
+function split() {
+  console.log(`Player's cards: ${yourCards}`);
+  for (var i = 0; i < yourCards.length; i++) {
+    var oneCard = yourCards[i].split("-");
+    yourValues.push(oneCard[0]);
+  }
 
+  console.log(`Values that you currently have are: ${yourValues}`);
+  //Can split
+  const toFindDuplicates = (yourValues) =>
+    yourValues.filter((value, index) => yourValues.indexOf(value) !== index); //Return the duplicated value in your cards
+  const duplicateElements = toFindDuplicates(yourValues);
+  console.log(duplicateElements);
+
+  if (duplicateElements != "") {
+    canSplit = true;
+    alert("You can split!");
+  } else {
+    alert("You are not able to split!");
+  }
+}

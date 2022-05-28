@@ -11,14 +11,17 @@ var tenChip = document.getElementById("10");
 var twentyChip = document.getElementById("20");
 var fiftyChip = document.getElementById("50");
 var hundredChip = document.getElementById("100");
-
+var start = false;
 var canBet = true;
 var betAmount = 0;
 
 window.onload = function () {
-  debugger;
+  //   debugger;
   bankAccount();
   bet();
+  if (start == true) {
+    startGame();
+  }
 };
 
 function bankAccount() {
@@ -124,6 +127,8 @@ function bet() {
       );
     } else {
       alert(`You have bet ${betAmount} dollars! Let's play!`);
+      start = true;
+      canBet = false;
     }
   });
 }
@@ -148,7 +153,3 @@ function updateBankAccount() {
 function updateBetAmount() {
   document.getElementById("betMoney").innerHTML = betAmount;
 }
-
-// document.getElementById("doneBetting").addEventListener("submit", function () {
-//   alert(`You have bet ${betAmount} dollars! Let's play!`);
-// });

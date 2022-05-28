@@ -27,4 +27,12 @@ body {
   height: 180px;
   padding: 5px;
 }
+
+.functions {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(100px, auto))[3];
+      grid-template-columns: repeat(3, minmax(100px, auto));
+  row-gap: 50px;
+}
 /*# sourceMappingURL=layout_style.css.map */

@@ -29,3 +29,9 @@ body {
   height: 180px;
   padding: 5px;
 }
+
+.functions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(100px, auto));
+  row-gap: 50px;
+}
