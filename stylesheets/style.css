@@ -3,6 +3,22 @@ body {
   padding: 0;
   font-family: Arial, Helvetica, sans-serif;
   background-image: radial-gradient(#3ca53c, green, darkgreen);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100vw;
+  height: 100vh;
+  gap: 10px;
 }
 
 div {
@@ -11,21 +27,28 @@ div {
   max-height: 100vh;
 }
 
-#your-table {
-  display: -ms-grid;
-  display: grid;
-      grid-template-areas: 'dealerCards' 'playerCards' 'button1 button2 button3';
-  width: 100vw;
-  height: 100vh;
-  gap: 10px;
+.functions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  gap: 5px;
 }
 
-#your-table > div {
-  text-align: center;
-  background-color: beige;
-}
-
-#dealer-cards img, #your-cards img {
+#dealer-cards img,
+#your-cards img {
   height: 175px;
   width: 125px;
   margin: 1px;
@@ -33,48 +56,20 @@ div {
           box-shadow: 15px 10px 20px #353434;
 }
 
-#dealer-cards img {
-  -ms-grid-row: 1;
-  -ms-grid-column: 1;
-  grid-area: dealerCards;
-  border: solid red 5px;
-}
-
-#your-cards img {
-  -ms-grid-row: 2;
-  -ms-grid-column: 1;
-  grid-area: playerCards;
-  border: solid yellow 5px;
-}
-
-#hit, #stay, #split {
+#hit,
+#stay,
+#split {
   width: 100px;
   height: 50px;
   font-size: 20px;
 }
 
-#hit {
-  -ms-grid-row: 3;
-  -ms-grid-column: 1;
-  grid-area: button1;
-  border: solid pink 5px;
-}
-
-#stay {
-  -ms-grid-row: 3;
-  -ms-grid-column: 2;
-  grid-area: button2;
-  border: solid goldenrod 5px;
-}
-
-#split {
-  -ms-grid-row: 3;
-  -ms-grid-column: 3;
-  grid-area: button3;
-  border: solid purple 5px;
+.your-score {
+  margin: 0;
+  padding-left: 0;
 }
 
 #results {
-  grid-area: result;
+  color: red;
 }
 /*# sourceMappingURL=style.css.map */

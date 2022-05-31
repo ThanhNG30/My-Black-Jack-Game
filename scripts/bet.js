@@ -32,7 +32,7 @@ function bankAccount() {
 }
 
 function bet() {
-  alert("Click on the chip for how much you want to bet.");
+  //alert("Click on the chip for how much you want to bet.");
   updateBetAmount();
   tenChip.addEventListener("click", function () {
     if (canBet && betAmount == 0) {

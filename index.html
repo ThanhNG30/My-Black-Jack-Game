@@ -5,42 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Black Jack</title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
-    <link rel="stylesheet" href="/stylesheets/chips.css">
+    <link rel="stylesheet" href="/stylesheets/chips.css" />
   </head>
 
   <body>
-    <div id="your-table">
     <!-- <h3 class="your-score">Your Score: <span class="your-score" id="your-score"></span></h3>
     <div>
     <h2>Dealer: <span id="dealer-sum"></span></h2> -->
+    <h2 class="text">Dealer</h2>
     <div id="dealer-cards">
       <img id="hidden" src="./cards/BACK.png" />
     </div>
 
     <!-- <h2>You: <span id="your-sum"></span></h2> -->
+    <h2 class="text">You</h2>
     <div id="your-cards"></div>
     <br />
     <p id="results"></p>
     <br />
-    
+
+    <div class="functions">
       <div><button id="hit">Hit</button></div>
       <div><button id="stay">Stay</button></div>
       <div><button id="split">Split</button></div>
     </div>
 
     <div class="bank-account">
-      Total Money: <span id="bank"></span> <br />
-      Money Bet: <span id="betMoney"></span>
+      <b>Total Money:</b> <span id="bank"></span> <br />
+      <b>Bet:</b> <span id="betMoney"></span>
       <button id="doneBetting">Bet</button>
     </div>
 
-    <div id="table">
-      <button class="chips" id="10">10</button>
-      <div class="chips" id="20">20</div>
-      <div class="chips" id="50">50</div>
-      <div class="chips" id="100">100</div>
+    <div class="chips">
+      <div><button id="10">10</button></div>
+      <div><button id="20">20</button></div>
+      <div><button id="50">50</button></div>
+      <div><button id="100">100</button></div>
     </div>
-  </div>
+
     <script src="/scripts/bet.js"></script>
     <script src="/scripts/blackjack.js"></script>
   </body>

@@ -1,6 +1,6 @@
 var dealerSum = 0;
 var yourSum = 0;
-var yourCards = []
+var yourCards = [];
 var yourValues = [];
 var dealerAceCount = 0;
 var yourAceCount = 0;
@@ -10,10 +10,6 @@ var deck;
 
 var canHit = true; //allows the player (you) to draw while yourSum <= 21
 var canSplit = false; //only allow the player (you) to split when they have 2 of the same value
-
-
-
-
 
 window.onload = function () {
   buildDeck();
@@ -60,7 +56,7 @@ function shuffleDeck() {
 }
 
 function startGame() {
-    //Ignore betting for now
+  //Ignore betting for now
   hidden = deck.pop();
   dealerSum += getValue(hidden);
   dealerAceCount += checkAce(hidden);
@@ -91,31 +87,29 @@ function startGame() {
   document.getElementById("hit").addEventListener("click", hit);
   document.getElementById("stay").addEventListener("click", stay);
   document.getElementById("split").addEventListener("click", split);
-
-
 }
 
 function split() {
-    console.log(`Player's cards: ${yourCards}`);
-    for (var i = 0; i< yourCards.length; i++) {
-        var oneCard = yourCards[i].split("-");
-        yourValues.push(oneCard[0]);
-    }
+  console.log(`Player's cards: ${yourCards}`);
+  for (var i = 0; i < yourCards.length; i++) {
+    var oneCard = yourCards[i].split("-");
+    yourValues.push(oneCard[0]);
+  }
 
-    console.log(`Values that you currently have are: ${yourValues}` );
-    //Can split
-    const toFindDuplicates = yourValues => yourValues.filter((value, index) => yourValues.indexOf(value) !== index) //Return the duplicated value in your cards
-    const duplicateElements = toFindDuplicates(yourValues);
-    console.log(duplicateElements);
+  console.log(`Values that you currently have are: ${yourValues}`);
+  //Can split
+  const toFindDuplicates = (yourValues) =>
+    yourValues.filter((value, index) => yourValues.indexOf(value) !== index); //Return the duplicated value in your cards
+  const duplicateElements = toFindDuplicates(yourValues);
+  console.log(duplicateElements);
 
-    if( duplicateElements != '') {
-        canSplit = true;
-        alert("You can split!");
-    } else {alert("You are not able to split!")}
+  if (duplicateElements != "") {
+    canSplit = true;
+    alert("You can split!");
+  } else {
+    alert("You are not able to split!");
+  }
 }
-  
-
-
 
 function hit() {
   if (!canHit) {
@@ -190,5 +184,3 @@ function reduceAce(playerSum, playerAceCount) {
   }
   return playerSum;
 }
-
-

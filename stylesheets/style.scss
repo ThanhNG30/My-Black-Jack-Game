@@ -1,8 +1,15 @@
-body{
+body {
   margin: 0;
   padding: 0;
   font-family: Arial, Helvetica, sans-serif;
   background-image: radial-gradient(rgb(60, 165, 60), green, darkgreen);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  gap: 10px;
 }
 
 div {
@@ -11,65 +18,36 @@ div {
   max-height: 100vh;
 }
 
-#your-table {
-  display: grid;
-  grid-template-areas: 
-    'dealerCards'
-    'playerCards'
-    'button1 button2 button3';
-  width: 100vw;
-  height: 100vh;
-  gap: 10px;
+.functions {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: fit-content;
+  gap: 5px;
 }
 
-#your-table > div {
-  text-align: center;
-  background-color: beige;
-}
-#dealer-cards img, #your-cards img {
+#dealer-cards img,
+#your-cards img {
   height: 175px;
   width: 125px;
   margin: 1px;
   box-shadow: 15px 10px 20px rgb(53, 52, 52);
 }
 
-#dealer-cards img {
-  grid-area: dealerCards;
-  border: solid red 5px;
-}
-
-#your-cards img {
-  grid-area: playerCards;
-  border: solid yellow 5px;
-}
-
-#hit, #stay, #split {
+#hit,
+#stay,
+#split {
   width: 100px;
   height: 50px;
   font-size: 20px;
-
 }
 
-#hit {
-  grid-area: button1;
-  border: solid pink 5px;
+.your-score {
+  margin: 0;
+  padding-left: 0;
 }
-
-#stay {
-  grid-area: button2;
-  border: solid goldenrod 5px;
-}
-
-#split {
-  grid-area: button3;
-  border: solid purple 5px;
-}
-// .your-score {
-//   grid-area: score;
-//   margin: 0;
-//   padding-left: 0;
-// }
 
 #results {
-  grid-area: result;
+  color: red;
 }

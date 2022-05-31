@@ -1,6 +1,7 @@
 var dealerSum = 0;
 var yourSum = 0;
-
+var yourCards = [];
+var yourValues = [];
 var dealerAceCount = 0;
 var yourAceCount = 0;
 
@@ -10,8 +11,6 @@ var deck;
 var canHit = true; //allows the player (you) to draw while yourSum <= 21
 var canSplit = false; //only allow the player (you) to split when they have 2 of the same value
 
-
-
 window.onload = function () {
   buildDeck();
   shuffleDeck();
@@ -19,6 +18,7 @@ window.onload = function () {
   // debugger;
 };
 
+//Create a deck of card
 function buildDeck() {
   let values = [
     "A",
@@ -46,6 +46,7 @@ function buildDeck() {
   // console.log(deck);
 }
 
+//Shuffle the deck
 function shuffleDeck() {
   for (let i = 0; i < deck.length; i++) {
     let j = Math.floor(Math.random() * deck.length); // (0-1) * 52 => (0-51.9999)
@@ -56,6 +57,7 @@ function shuffleDeck() {
   console.log(deck);
 }
 
+//setting up the game
 function startGame() {
   bankAccount();
   bet();
@@ -78,6 +80,7 @@ function startGame() {
   for (let i = 0; i < 2; i++) {
     let cardImg = document.createElement("img");
     let card = deck.pop();
+    yourCards.push(card);
     cardImg.src = "./cards/" + card + ".png";
     yourSum += getValue(card);
     yourAceCount += checkAce(card);
@@ -87,8 +90,10 @@ function startGame() {
   console.log(yourSum);
   document.getElementById("hit").addEventListener("click", hit);
   document.getElementById("stay").addEventListener("click", stay);
+  document.getElementById("split").addEventListener("click", split);
 }
 
+//Hit
 function hit() {
   if (!canHit) {
     return;
@@ -107,10 +112,11 @@ function hit() {
   }
 }
 
+//Stay
 function stay() {
   dealerSum = reduceAce(dealerSum, dealerAceCount);
   yourSum = reduceAce(yourSum, yourAceCount);
-
+  canSplit = false;
   canHit = false;
   document.getElementById("hidden").src = "./cards/" + hidden + ".png";
 
@@ -134,6 +140,30 @@ function stay() {
   document.getElementById("results").innerText = message;
 }
 
+//Split
+function split() {
+  console.log(`Player's cards: ${yourCards}`);
+  for (var i = 0; i < yourCards.length; i++) {
+    var oneCard = yourCards[i].split("-");
+    yourValues.push(oneCard[0]);
+  }
+
+  console.log(`Values that you currently have are: ${yourValues}`);
+  //Can split
+  const toFindDuplicates = (yourValues) =>
+    yourValues.filter((value, index) => yourValues.indexOf(value) !== index); //Return the duplicated value in your cards
+  const duplicateElements = toFindDuplicates(yourValues);
+  console.log(duplicateElements);
+
+  if (duplicateElements != "") {
+    canSplit = true;
+    alert("You can split!");
+  } else {
+    alert("You are not able to split!");
+  }
+}
+
+//To import cards' images
 function getValue(card) {
   let data = card.split("-"); // "4-C" -> ["4", "C"]
   let value = data[0];
@@ -148,13 +178,13 @@ function getValue(card) {
   return parseInt(value);
 }
 
+//Counting A
 function checkAce(card) {
   if (card[0] == "A") {
     return 1;
   }
   return 0;
 }
-
 function reduceAce(playerSum, playerAceCount) {
   while (playerSum > 21 && playerAceCount > 0) {
     playerSum -= 10;
@@ -162,5 +192,3 @@ function reduceAce(playerSum, playerAceCount) {
   }
   return playerSum;
 }
-
-
