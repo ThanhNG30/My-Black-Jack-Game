@@ -11,14 +11,17 @@ var tenChip = document.getElementById("10");
 var twentyChip = document.getElementById("20");
 var fiftyChip = document.getElementById("50");
 var hundredChip = document.getElementById("100");
-
+var start = false;
 var canBet = true;
 var betAmount = 0;
 
 window.onload = function () {
-  debugger;
+  //   debugger;
   bankAccount();
   bet();
+  if (start == true) {
+    startGame();
+  }
 };
 
 function bankAccount() {
@@ -32,8 +35,16 @@ function bankAccount() {
 }
 
 function bet() {
+<<<<<<< HEAD
   //alert("Click on the chip for how much you want to bet.");
   updateBetAmount();
+=======
+  if (betAmount == 0) {
+    alert("Click on the chip for how much you want to bet.");
+    updateBetAmount();
+  }
+
+>>>>>>> 2dd4eb3707f7fed51bbd8c12f34bad1e1a338edd
   tenChip.addEventListener("click", function () {
     if (canBet && betAmount == 0) {
       checkBalance();
@@ -115,7 +126,15 @@ function bet() {
     }
   });
   document.getElementById("doneBetting").addEventListener("click", function () {
-    alert(`You have bet ${betAmount} dollars! Let's play!`);
+    if (betAmount == 0) {
+      alert(
+        "You have not bet. Click on the chip for how much you want to bet."
+      );
+    } else {
+      alert(`You have bet ${betAmount} dollars! Let's play!`);
+      start = true;
+      canBet = false;
+    }
   });
 }
 
@@ -139,7 +158,3 @@ function updateBankAccount() {
 function updateBetAmount() {
   document.getElementById("betMoney").innerHTML = betAmount;
 }
-
-// document.getElementById("doneBetting").addEventListener("submit", function () {
-//   alert(`You have bet ${betAmount} dollars! Let's play!`);
-// });
