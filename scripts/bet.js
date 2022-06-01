@@ -1,30 +1,32 @@
+//The game won't start until the player bet
+export var start = false;
+
 //Chips that the player has
-var bank;
-let chips = [
+export var bank;
+
+export var chips = [
   [10, 10, 10],
   [20, 20, 20],
   [50, 50, 50],
   [100, 100, 100],
 ];
 
-var tenChip = document.getElementById("10");
-var twentyChip = document.getElementById("20");
-var fiftyChip = document.getElementById("50");
-var hundredChip = document.getElementById("100");
-var start = false;
-var canBet = true;
-var betAmount = 0;
+export var tenChip = document.getElementById("10");
+export var twentyChip = document.getElementById("20");
+export var fiftyChip = document.getElementById("50");
+export var hundredChip = document.getElementById("100");
 
-window.onload = function () {
-  //   debugger;
-  bankAccount();
-  bet();
-  if (start == true) {
-    startGame();
-  }
-};
+export var canBet = true;
+export var betAmount = 0;
 
-function bankAccount() {
+// window.onload = function () {
+//   debugger;
+//   alert("Put your money down for the game to start.");
+//   bankAccount();
+//   bet();
+// };
+
+export function bankAccount() {
   bank = 0;
   for (var i = 0; i < chips.length; i++) {
     for (var l = 0; l < chips[i].length; l++) {
@@ -34,17 +36,12 @@ function bankAccount() {
   }
 }
 
-function bet() {
-<<<<<<< HEAD
-  //alert("Click on the chip for how much you want to bet.");
-  updateBetAmount();
-=======
+export function bet() {
   if (betAmount == 0) {
     alert("Click on the chip for how much you want to bet.");
     updateBetAmount();
   }
 
->>>>>>> 2dd4eb3707f7fed51bbd8c12f34bad1e1a338edd
   tenChip.addEventListener("click", function () {
     if (canBet && betAmount == 0) {
       checkBalance();
@@ -125,20 +122,21 @@ function bet() {
       alert("Sorry, you cannot bet anymore.");
     }
   });
+
+  //When player committed their bet amount, the game starts.
   document.getElementById("doneBetting").addEventListener("click", function () {
     if (betAmount == 0) {
-      alert(
+      console.log(
         "You have not bet. Click on the chip for how much you want to bet."
       );
     } else {
-      alert(`You have bet ${betAmount} dollars! Let's play!`);
       start = true;
       canBet = false;
     }
   });
 }
 
-function checkBalance() {
+export function checkBalance() {
   if (bank < parseInt(document.getElementById("betMoney").innerHTML)) {
     canBet = false;
     alert("You have no money left! Go sell your kidney!");
@@ -147,7 +145,7 @@ function checkBalance() {
   }
 }
 
-function updateBankAccount() {
+export function updateBankAccount() {
   if (bank <= 0) {
     document.getElementById("bank").innerHTML = 0;
   } else {
@@ -155,6 +153,6 @@ function updateBankAccount() {
   }
 }
 
-function updateBetAmount() {
+export function updateBetAmount() {
   document.getElementById("betMoney").innerHTML = betAmount;
 }

@@ -1,4 +1,5 @@
 .chips {
+<<<<<<< HEAD
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -12,10 +13,36 @@
   background-color: #4caf50; /* Green */
   border: none;
   border-radius: 20%;
+=======
+  position: fixed;
+  padding-bottom: 0;
+  margin-bottom: 0;
+  bottom: 0;
+  height: 10vh;
+  width: 100vw;
+  background-image: linear-gradient(to top, darkgreen, green);
+  margin: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 3em;
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+}
+
+.chips > div > button {
+  background-color: #4caf50;
+  border: none;
+>>>>>>> 2dd4eb3707f7fed51bbd8c12f34bad1e1a338edd
   color: white;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+<<<<<<< HEAD
+=======
+  margin: 4px 2px;
+>>>>>>> 2dd4eb3707f7fed51bbd8c12f34bad1e1a338edd
 }
