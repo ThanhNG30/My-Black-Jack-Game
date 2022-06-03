@@ -1,0 +1,67 @@
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background-color: #0a301e;
+}
+
+.background {
+  position: absolute;
+  height: 50vh;
+  width: 50vw;
+  margin: 0;
+  padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.background li {
+  list-style: none;
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  margin: -100px;
+  overflow: hidden;
+  background: beige;
+  border: 12px solid brown;
+}
+
+.background li.diamond1 {
+  bottom: 0;
+  left: -33%;
+}
+
+.background li.diamond2 {
+  top: 0;
+  left: 0;
+}
+
+.background li.diamond3 {
+  bottom: 0;
+  left: 33%;
+}
+
+.background li.diamond4 {
+  top: 0;
+  left: 66%;
+}
+
+.background li.diamond5 {
+  bottom: 0;
+  left: 99%;
+}
+/*# sourceMappingURL=styles.css.map */
