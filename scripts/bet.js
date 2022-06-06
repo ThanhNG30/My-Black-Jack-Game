@@ -5,10 +5,12 @@ export var start = false;
 export var bank;
 
 export var chips = [
-  [10, 10, 10],
-  [20, 20, 20],
+  [10, 10, 10, 10, 10],
+  [25, 25, 25, 25],
   [50, 50, 50],
-  [100, 100, 100],
+  [100, 100],
+  [250, 250],
+  [500],
 ];
 
 export var tenChip = document.getElementById("10");

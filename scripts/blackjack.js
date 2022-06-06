@@ -6,9 +6,10 @@ var start = bet.start;
 var canBet = bet.canBet;
 var dealerAceCount = 0;
 var yourAceCount = 0;
-
+var result = "";
 var hidden;
 var deck;
+var bank = bet.bank;
 
 var canHit = false; //allows the player (you) to draw while yourSum <= 21 only when game starts.
 var canSplit = false; //only allow the player (you) to split when they have 2 of the same value
@@ -18,6 +19,7 @@ window.onload = function () {
   buildDeck();
   shuffleDeck();
   alert("Bet money to start game.");
+  bet.bankAccount();
   startGame();
   // debugger;
 };
@@ -60,7 +62,8 @@ function shuffleDeck() {
 }
 
 function startGame() {
-  bet.bankAccount();
+  canBet = true;
+  bet.updateBankAccount();
   bet.bet();
   document.getElementById("doneBetting").addEventListener("click", function () {
     if (bet.betAmount == 0) {
@@ -80,8 +83,7 @@ function startGame() {
       hidden = deck.pop();
       dealerSum += getValue(hidden);
       dealerAceCount += checkAce(hidden);
-      // console.log(hidden);
-      // console.log(dealerSum);
+
       while (dealerSum < 17) {
         //<img src="./cards/4-C.png">
         let cardImg = document.createElement("img");
@@ -166,23 +168,58 @@ function stay() {
   document.getElementById("hidden").src = "./cards/" + hidden + ".png";
 
   let message = "";
+  //When you or dealer sum is over 21.
   if (yourSum > 21) {
-    message = "You Lose!";
+    message = "You Lose! Want to try again?";
+    result = "lose";
   } else if (dealerSum > 21) {
-    message = "You win!";
+    message = "You win! Let's play another round!";
+    result = "win";
   }
-  //both you and dealer <= 21
-  else if (yourSum == dealerSum) {
-    message = "Tie!";
-  } else if (yourSum > dealerSum) {
-    message = "You Win!";
+  //When you and dealer both <=21
+  else if (yourSum > dealerSum) {
+    message = "You win! Let's play another round!";
+    result = "win";
   } else if (yourSum < dealerSum) {
-    message = "You Lose!";
+    message = "You Lose! Want to try again?";
+    result = "lose";
+  } else if (yourSum == dealerSum) {
+    message = "Tie! Let's play another round!";
+    result = "tie";
   }
-
   document.getElementById("dealer-sum").innerText = dealerSum;
   document.getElementById("your-sum").innerText = yourSum;
   document.getElementById("results").innerText = message;
+  console.log(result);
+
+  var playAgainBtn = document.createElement("button");
+  playAgainBtn.id = "play-again";
+  const btnBox = document.getElementById("btn-box");
+  playAgainBtn.innerText = "Play again";
+
+  playAgainBtn.addEventListener("click", () => {
+    window.location.reload();
+    console.log(result);
+    // if (result == "lose") {
+    //   console.log(result);
+    //   start = true;
+    //   //Lose condition
+    //   startGame();
+    // } else if (result == "win") {
+    //   console.log(result);
+    //   start = true;
+    //   //Win condition
+    //   bank += bet.betAmount * 2;
+    //   startGame();
+    // } else if (result == "tie") {
+    //   console.log(result);
+    //   start = true;
+    //   //Tie condition
+    //   bank += bet.betAmount;
+    //   startGame();
+    // }
+  });
+  btnBox.appendChild(playAgainBtn);
 }
 
 function getValue(card) {
