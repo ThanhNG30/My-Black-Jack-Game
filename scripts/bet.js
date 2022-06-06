@@ -14,9 +14,11 @@ export var chips = [
 ];
 
 export var tenChip = document.getElementById("10");
-export var twentyChip = document.getElementById("20");
+export var twentyfiveChip = document.getElementById("25");
 export var fiftyChip = document.getElementById("50");
 export var hundredChip = document.getElementById("100");
+export var twohundredfiftyChip = document.getElementById("250");
+export var fivehundredChip = document.getElementById("500");
 
 export var canBet = true;
 export var betAmount = 0;
