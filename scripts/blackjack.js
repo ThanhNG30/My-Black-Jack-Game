@@ -39,15 +39,14 @@ function bankAccount() {
 function bet() {
   if (betAmount == 0) {
     alert("Click on the chip for how much you want to bet.");
-    updateBetAmount();
+    updateBetAmount(0);
     console.log(chips);
   }
 
   tenChip.addEventListener("click", function () {
     if (canBet && betAmount == 0) {
       checkBalance();
-      betAmount = 10;
-      updateBetAmount();
+      updateBetAmount(10);
       bank -= 10;
       chips[0].splice(0, 1);
       console.log(chips[0]);
@@ -56,9 +55,8 @@ function bet() {
       if (
         confirm("You have chosen an amount. Do you want to change?") == true
       ) {
-        betAmount = 0;
         alert("Click on the chip for how much you want to bet.");
-        updateBetAmount();
+        updateBetAmount(0);
         bankAccount();
       }
     } else {
@@ -68,19 +66,16 @@ function bet() {
   twentyfiveChip.addEventListener("click", function () {
     if (canBet && betAmount == 0) {
       checkBalance();
-      betAmount = 25;
-      updateBetAmount();
+      updateBetAmount(25);
       bank -= 25;
-      chips[1].splice(0, 1);
       console.log(chips[1]);
       updateBankAccount();
     } else if (canBet && betAmount != 0) {
       if (
         confirm("You have chosen an amount. Do you want to change?") == true
       ) {
-        betAmount = 0;
         alert("Click on the chip for how much you want to bet.");
-        updateBetAmount();
+        updateBetAmount(0);
         bankAccount();
       }
     } else {
@@ -90,19 +85,16 @@ function bet() {
   fiftyChip.addEventListener("click", function () {
     if (canBet && betAmount == 0) {
       checkBalance();
-      betAmount = 50;
-      updateBetAmount();
+      updateBetAmount(50);
       bank -= 50;
-      chips[2].splice(0, 1);
       console.log(chips[2]);
       updateBankAccount();
     } else if (canBet && betAmount != 0) {
       if (
         confirm("You have chosen an amount. Do you want to change?") == true
       ) {
-        betAmount = 0;
         alert("Click on the chip for how much you want to bet.");
-        updateBetAmount();
+        updateBetAmount(0);
         bankAccount();
       }
     } else {
@@ -112,19 +104,16 @@ function bet() {
   hundredChip.addEventListener("click", function () {
     if (canBet && betAmount == 0) {
       checkBalance();
-      betAmount = 100;
-      updateBetAmount();
+      updateBetAmount(100);
       bank -= 100;
-      chips[3].splice(0, 1);
       console.log(chips[3]);
       updateBankAccount();
     } else if (canBet && betAmount != 0) {
       if (
         confirm("You have chosen an amount. Do you want to change?") == true
       ) {
-        betAmount = 0;
         alert("Click on the chip for how much you want to bet.");
-        updateBetAmount();
+        updateBetAmount(0);
         bankAccount();
       }
     } else {
@@ -134,19 +123,16 @@ function bet() {
   twohundredfiftyChip.addEventListener("click", function () {
     if (canBet && betAmount == 0) {
       checkBalance();
-      betAmount = 250;
-      updateBetAmount();
+      updateBetAmount(250);
       bank -= 250;
-      chips[4].splice(0, 1);
       console.log(chips[4]);
       updateBankAccount();
     } else if (canBet && betAmount != 0) {
       if (
         confirm("You have chosen an amount. Do you want to change?") == true
       ) {
-        betAmount = 0;
         alert("Click on the chip for how much you want to bet.");
-        updateBetAmount();
+        updateBetAmount(0);
         bankAccount();
       }
     } else {
@@ -156,19 +142,16 @@ function bet() {
   fivehundredChip.addEventListener("click", function () {
     if (canBet && betAmount == 0) {
       checkBalance();
-      betAmount = 500;
-      updateBetAmount();
+      updateBetAmount(500);
       bank -= 500;
-      chips[5].splice(0, 1);
       console.log(chips[5]);
       updateBankAccount();
     } else if (canBet && betAmount != 0) {
       if (
         confirm("You have chosen an amount. Do you want to change?") == true
       ) {
-        betAmount = 0;
         alert("Click on the chip for how much you want to bet.");
-        updateBetAmount();
+        updateBetAmount(0);
         bankAccount();
       }
     } else {
@@ -206,7 +189,8 @@ function updateBankAccount() {
   }
 }
 
-function updateBetAmount() {
+function updateBetAmount(amount) {
+  betAmount = amount;
   document.getElementById("betMoney").innerHTML = betAmount;
 }
 
@@ -228,8 +212,6 @@ var canStay = false; //will allow the player to click when game starts.
 window.onload = function () {
   buildDeck();
   shuffleDeck();
-  alert("Bet money to start game.");
-  bankAccount();
   startGame();
   // debugger;
 };
@@ -272,8 +254,12 @@ function shuffleDeck() {
 }
 
 function startGame() {
+  restartGame();
+  alert("Bet money to start game.");
+  bankAccount();
   canBet = true;
   updateBankAccount();
+  updateBetAmount(0);
   bet();
   document.getElementById("doneBetting").addEventListener("click", function () {
     if (betAmount == 0) {
@@ -391,11 +377,13 @@ function stay() {
   playAgainBtn.innerText = "Play again";
 
   playAgainBtn.addEventListener("click", () => {
-    restartGame();
-    console.log(chips);
-    bankAccount();
-
-    //window.location.reload();
+    // restartGame();
+    // bankAccount();
+    // updateBankAccount();
+    // updateBetAmount(0);
+    // console.log(chips);
+    // console.log(bank);
+    window.location.reload();
   });
   btnBox.appendChild(playAgainBtn);
 }
@@ -457,6 +445,7 @@ function split() {
 }
 
 function restartGame() {
+  console.log(betAmount);
   if (result == "tie") {
     switch (betAmount) {
       case 10:
@@ -478,6 +467,7 @@ function restartGame() {
         chips[5].splice(0, 1, 500);
         break;
       default:
+        console.log(chips);
     }
   } else if (result == "lose") {
     switch (betAmount) {
@@ -500,28 +490,32 @@ function restartGame() {
         chips[5].splice(0, 1);
         break;
       default:
+        console.log(chips);
     }
   } else if (result == "win") {
     switch (betAmount) {
       case 10:
-        chips[0].splice(0, 2, 10, 10);
+        chips[0].splice(0, 0, 10);
         break;
       case 25:
-        chips[1].splice(0, 2, 25, 25);
+        chips[1].splice(0, 0, 25);
         break;
       case 50:
-        chips[2].splice(0, 2, 50, 50);
+        chips[2].splice(0, 0, 50);
         break;
       case 100:
-        chips[3].splice(0, 2, 100, 100);
+        chips[3].splice(0, 0, 100);
         break;
       case 250:
-        chips[4].splice(0, 2, 250, 250);
+        chips[4].splice(0, 0, 250);
         break;
       case 500:
-        chips[5].splice(0, 2, 500, 500);
+        chips[5].splice(0, 0, 500);
         break;
       default:
+        console.log(chips);
     }
+  } else {
+    return;
   }
 }
