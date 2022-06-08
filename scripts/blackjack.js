@@ -1,3 +1,5 @@
+import * as results from "./result.js";
+
 //Chips that the player has
 var bank;
 
@@ -201,7 +203,7 @@ var start = false;
 
 var dealerAceCount = 0;
 var yourAceCount = 0;
-var result = "";
+
 var hidden;
 var deck;
 
@@ -212,6 +214,8 @@ var canStay = false; //will allow the player to click when game starts.
 window.onload = function () {
   buildDeck();
   shuffleDeck();
+  console.log(`Current Result is ${results.currentResult}`);
+  restartGame();
   startGame();
   // debugger;
 };
@@ -254,11 +258,8 @@ function shuffleDeck() {
 }
 
 function startGame() {
-  restartGame();
   alert("Bet money to start game.");
-  bankAccount();
   canBet = true;
-  updateBankAccount();
   updateBetAmount(0);
   bet();
   document.getElementById("doneBetting").addEventListener("click", function () {
@@ -350,40 +351,32 @@ function stay() {
   //When you or dealer sum is over 21.
   if (yourSum > 21) {
     message = "You Lose! Want to try again?";
-    result = "lose";
   } else if (dealerSum > 21) {
     message = "You win! Let's play another round!";
-    result = "win";
   }
   //When you and dealer both <=21
   else if (yourSum > dealerSum) {
     message = "You win! Let's play another round!";
-    result = "win";
   } else if (yourSum < dealerSum) {
     message = "You Lose! Want to try again?";
-    result = "lose";
   } else if (yourSum == dealerSum) {
     message = "Tie! Let's play another round!";
-    result = "tie";
   }
   document.getElementById("dealer-sum").innerText = dealerSum;
   document.getElementById("your-sum").innerText = yourSum;
   document.getElementById("results").innerText = message;
-  console.log(result);
 
   var playAgainBtn = document.createElement("button");
   playAgainBtn.id = "play-again";
+
   const btnBox = document.getElementById("btn-box");
   playAgainBtn.innerText = "Play again";
 
   playAgainBtn.addEventListener("click", () => {
-    // restartGame();
-    // bankAccount();
-    // updateBankAccount();
-    // updateBetAmount(0);
-    // console.log(chips);
-    // console.log(bank);
-    window.location.reload();
+    results.giveResult();
+    restartGame();
+    console.log(results.currentResult);
+    //window.location.reload();
   });
   btnBox.appendChild(playAgainBtn);
 }
@@ -445,8 +438,11 @@ function split() {
 }
 
 function restartGame() {
-  console.log(betAmount);
-  if (result == "tie") {
+  //Check for last game's result
+  console.log(
+    `Bet amount is ${betAmount} and Current Result is ${results.currentResult}`
+  );
+  if (results.currentResult == "tie") {
     switch (betAmount) {
       case 10:
         chips[0].splice(0, 1, 10);
@@ -469,7 +465,7 @@ function restartGame() {
       default:
         console.log(chips);
     }
-  } else if (result == "lose") {
+  } else if (results.currentResult == "lose") {
     switch (betAmount) {
       case 10:
         chips[0].splice(0, 1);
@@ -490,9 +486,8 @@ function restartGame() {
         chips[5].splice(0, 1);
         break;
       default:
-        console.log(chips);
     }
-  } else if (result == "win") {
+  } else if (results.currentResult == "win") {
     switch (betAmount) {
       case 10:
         chips[0].splice(0, 0, 10);
@@ -513,9 +508,10 @@ function restartGame() {
         chips[5].splice(0, 0, 500);
         break;
       default:
-        console.log(chips);
     }
-  } else {
-    return;
   }
+  console.log(chips);
+  //if there was no last game, the computer will just run this:
+  bankAccount();
+  console.log(bank);
 }
