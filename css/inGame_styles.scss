@@ -1,0 +1,84 @@
+@font-face {
+  font-family: Kurye;
+  src: url(../assets/Kurye-Light.otf);
+}
+
+@font-face {
+  font-family: Konstarica;
+  src: url(../assets/Konstarica.otf);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-image: url(../assets/bg.png);
+  background-size: 100% auto;
+}
+#title {
+  //Blackjack watermark
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: Konstarica;
+  color: rgba($color: #22b388, $alpha: 0.15);
+  font-size: 8em;
+  z-index: -1;
+}
+// Do not touch the upper part
+
+// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////@at-root
+//This part is for the cards
+.table {
+  display: flex;
+  flex-direction: column;
+  gap: 5em;
+  position: absolute;
+  height: 80vh;
+  width: max-content;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  align-items: center;
+  justify-content: center;
+}
+h3 {
+  font-family: Kurye;
+  color: rgb(216, 236, 214);
+  font-size: 1.5em;
+}
+
+div > img {
+  //cards
+  height: 200px;
+  width: auto;
+}
+
+.table > .player > #your-cards,
+.table > .dealer > #dealer-cards {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+//This part is for the buttons
+.btn-box {
+  position: absolute;
+  top: 50%;
+  left: 70%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.btn-box > button {
+  height: 75px;
+  width: 75px;
+  background-color: #22b388;
+}

@@ -1,0 +1,114 @@
+@font-face {
+  font-family: Kurye;
+  src: url(../assets/Kurye-Light.otf);
+}
+
+@font-face {
+  font-family: Konstarica;
+  src: url(../assets/Konstarica.otf);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background-image: url(../assets/bg.png);
+  background-size: 100% auto;
+}
+
+#title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  font-family: Konstarica;
+  color: rgba(34, 179, 136, 0.15);
+  font-size: 8em;
+  z-index: -1;
+}
+
+.table {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 5em;
+  position: absolute;
+  height: 80vh;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  z-index: -1;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+h3 {
+  font-family: Kurye;
+  color: #d8ecd6;
+  font-size: 1.5em;
+}
+
+div > img {
+  height: 200px;
+  width: auto;
+}
+
+.table > .player > #your-cards,
+.table > .dealer > #dealer-cards {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  gap: 5px;
+}
+
+.btn-box {
+  position: absolute;
+  top: 50%;
+  left: 70%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 20px;
+}
+
+.btn-box > button {
+  height: 75px;
+  width: 75px;
+  background-color: #22b388;
+}
+/*# sourceMappingURL=inGame_styles.css.map */

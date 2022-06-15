@@ -1,3 +1,3 @@
 function start() {
-  //window.location.replace("../game.html");
+  window.location.replace("../how_to_play.html");
 }

@@ -4,18 +4,37 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blackjack 2022</title>
-    <link rel="stylesheet" href="./css/game_styles.css" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/inGame_styles.css" />
   </head>
   <body>
     <div id="title">Blackjack</div>
 
-    <h2>How to Play</h2>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus, animi
-      laboriosam optio, accusantium doloribus provident perferendis nisi placeat
-      nam minima eligendi explicabo? Nisi quibusdam sapiente adipisci eaque,
-      laudantium quasi neque?
-    </p>
+    <!-- Do not change the upper part. It's just a watermark -->
+
+    <!-- This is the layout of the game, you can modify. -->
+
+    <div class="table">
+      <div class="dealer">
+        <h3 id="dealer">Dealer: <span id="dealer-sum"></span></h3>
+        <div id="dealer-cards">
+          <img id="hidden" src="./cards/BACK.png" />
+        </div>
+      </div>
+      <p id="results"></p>
+      <div class="player">
+        <h3 id="player">You: <span id="your-sum"></span></h3>
+        <div id="your-cards">
+          <img id="hidden" src="./cards/BACK.png" />
+          <img id="hidden" src="./cards/BACK.png" />
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-box">
+      <button id="hit">Hit</button>
+      <button id="stay">Stay</button>
+      <button id="split">Split</button>
+    </div>
   </body>
 </html>
