@@ -28,7 +28,6 @@ body {
           flex-direction: column;
   background-image: url(../assets/bg.png);
   background-size: 100% auto;
-  background-repeat: no-repeat;
 }
 
 .text {
@@ -126,4 +125,4 @@ body {
     opacity: 1;
   }
 }
-/*# sourceMappingURL=styles.css.map */
+/*# sourceMappingURL=home_styles.css.map */
