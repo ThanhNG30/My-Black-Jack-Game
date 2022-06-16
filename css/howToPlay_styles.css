@@ -45,9 +45,10 @@ body {
 }
 
 h2 {
+  padding-top: 150px;
   font-family: Konstarica;
   color: #d1df7e;
-  font-size: 7em;
+  font-size: 5em;
 }
 
 p {
@@ -117,4 +118,4 @@ p > #iGotIt:hover::before {
     color: #d1df7e;
   }
 }
-/*# sourceMappingURL=game_styles.css.map */
+/*# sourceMappingURL=howToPlay_styles.css.map */

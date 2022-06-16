@@ -10,7 +10,11 @@
   <body>
     <div id="title">Blackjack</div>
 
-    <!-- Do not change the upper part. It's just a watermark -->
+    <div class="menu-btn">
+      <div class="menu-btn__burger"></div>
+    </div>
+
+    <!-- Do not change the upper part.-->
 
     <!-- This is the layout of the game, you can modify. -->
 
@@ -26,15 +30,22 @@
         <h3 id="player">You: <span id="your-sum"></span></h3>
         <div id="your-cards">
           <img id="hidden" src="./cards/BACK.png" />
-          <img id="hidden" src="./cards/BACK.png" />
         </div>
       </div>
     </div>
 
     <div class="btn-box">
-      <button id="hit">Hit</button>
-      <button id="stay">Stay</button>
-      <button id="split">Split</button>
+      <button id="hit">
+        <span class="split-text" data-text="Hit">Hit</span>
+      </button>
+      <button id="stay">
+        <span class="split-text" data-text="Stay">Stay</span>
+      </button>
+      <button id="split">
+        <span class="split-text" data-text="Split">Split</span>
+      </button>
     </div>
+
+    <script src="./scripts/main.js"></script>
   </body>
 </html>
