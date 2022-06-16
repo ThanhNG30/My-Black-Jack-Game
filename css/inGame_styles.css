@@ -337,4 +337,62 @@ div > img {
   -webkit-transform: scale(1);
           transform: scale(1);
 }
+
+.bank-account {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  text-align: left;
+  font-family: Kurye;
+  color: #d8ecd6;
+  font-size: 1.5em;
+}
+
+#doneBetting {
+  display: block;
+  position: absolute !important;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  height: 75px;
+  width: 75px;
+  background-color: transparent;
+  border: none;
+  font-family: Konstarica;
+  color: #d1df7e;
+  font-size: 2rem;
+  font-weight: bold;
+  font-size: 2.5rem;
+}
+
+#doneBetting:hover {
+  color: #fff;
+}
+
+#doneBetting.hidden {
+  display: none;
+}
+
+.chips {
+  position: absolute;
+  top: 60%;
+  left: 10%;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  width: 300px;
+  -ms-grid-columns: 100px 100px 100px;
+      grid-template-columns: 100px 100px 100px;
+  -ms-grid-rows: auto auto;
+      grid-template-rows: auto auto;
+}
+
+.chips > div > button {
+  background: rgba(47, 255, 95, 0.2);
+  border-radius: 10%;
+  color: #fff;
+  font-size: 1.4rem;
+  padding: 10px;
+}
 /*# sourceMappingURL=inGame_styles.css.map */
