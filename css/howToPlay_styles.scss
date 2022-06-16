@@ -1,0 +1,85 @@
+@font-face {
+  font-family: Kurye;
+  src: url(../assets/Kurye-Light.otf);
+}
+
+@font-face {
+  font-family: Konstarica;
+  src: url(../assets/Konstarica.otf);
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  justify-content: center;
+  align-items: center;
+  background-image: url(../assets/game_bg.png);
+  background-size: 100% auto;
+}
+
+#title {
+  //Blackjack watermark
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: Konstarica;
+  color: rgba($color: #22b388, $alpha: 0.15);
+  font-size: 8em;
+  z-index: -1;
+}
+
+h2 {
+  //How to play
+  padding-top: 150px;
+  font-family: Konstarica;
+  color: #d1df7e;
+  font-size: 5em;
+}
+
+p {
+  background-color: rgba(216, 236, 214, 0.2);
+  border-radius: 10%;
+  padding: 30px 25px;
+  //Instructions
+  width: 40vw;
+  font-family: Kurye;
+  color: rgb(216, 236, 214);
+  font-size: 1.5em;
+  text-shadow: 5px 5px 15px rgba(255, 255, 255, 0.488);
+  animation: openUp 300ms 100ms ease-in forwards;
+}
+
+p > #iGotIt::before {
+  content: "I got it!";
+}
+
+p > #iGotIt:hover::before {
+  animation: changeContent 250ms ease-in-out forwards;
+}
+
+@keyframes openUp {
+  0% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+@keyframes changeContent {
+  0% {
+    content: "I got it!";
+  }
+  100% {
+    content: "Let's play!";
+    color: #d1df7e;
+  }
+}

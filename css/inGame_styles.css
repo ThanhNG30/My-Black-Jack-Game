@@ -1,0 +1,340 @@
+@font-face {
+  font-family: Kurye;
+  src: url(../assets/Kurye-Light.otf);
+}
+
+@font-face {
+  font-family: Konstarica;
+  src: url(../assets/Konstarica.otf);
+}
+
+:root {
+  --background: linear-gradient(45deg, #ffffff, #e2caca);
+  --text-color: #d1df7e;
+  --line-height: 1.5;
+}
+
+@-webkit-keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background-image: url(../assets/bg.png);
+  background-size: 100% auto;
+  -webkit-animation: fadeIn 150ms ease-in 100ms forwards;
+          animation: fadeIn 150ms ease-in 100ms forwards;
+}
+
+#title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -webkit-animation: fadeIn 150ms ease-in 100ms forwards;
+          animation: fadeIn 150ms ease-in 100ms forwards;
+  font-family: Konstarica;
+  color: rgba(34, 179, 136, 0.15);
+  font-size: 8em;
+  z-index: -1;
+}
+
+.menu-btn {
+  position: absolute;
+  top: 50px;
+  right: 10px;
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  /* border: 3px solid #fff; */
+}
+
+.menu-btn__burger {
+  width: 40px;
+  height: 4px;
+  background: #22b388;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 2px 5px rgba(255, 101, 47, 0.2);
+  box-shadow: 0 2px 5px rgba(255, 101, 47, 0.2);
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+
+.menu-btn__burger:hover,
+.menu-btn__burger:hover::before,
+.menu-btn__burger:hover::after {
+  -webkit-animation: glow 100ms ease-in forwards;
+          animation: glow 100ms ease-in forwards;
+}
+
+@-webkit-keyframes glow {
+  to {
+    background: #fff;
+    -webkit-box-shadow: 0 2px 5px rgba(255, 101, 47, 0.2);
+            box-shadow: 0 2px 5px rgba(255, 101, 47, 0.2);
+  }
+}
+
+@keyframes glow {
+  to {
+    background: #fff;
+    -webkit-box-shadow: 0 2px 5px rgba(255, 101, 47, 0.2);
+            box-shadow: 0 2px 5px rgba(255, 101, 47, 0.2);
+  }
+}
+
+.menu-btn__burger::before,
+.menu-btn__burger::after {
+  background: #22b388;
+  content: "";
+  position: absolute;
+  width: 40px;
+  height: 4px;
+  border-radius: 5px;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+
+.menu-btn__burger::before {
+  -webkit-transform: translateY(-16px);
+  transform: translateY(-16px);
+}
+
+.menu-btn__burger::after {
+  -webkit-transform: translateY(16px);
+  transform: translateY(16px);
+}
+
+/* ANIMATION */
+.menu-btn.open .menu-btn__burger {
+  -webkit-transform: translateX(-50px);
+  transform: translateX(-50px);
+  background: transparent !important;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.menu-btn.open .menu-btn__burger::before {
+  -webkit-transform: rotate(45deg) translate(35px, -35px);
+  transform: rotate(45deg) translate(35px, -35px);
+}
+
+.menu-btn.open .menu-btn__burger::after {
+  -webkit-transform: rotate(-45deg) translate(35px, 35px);
+  transform: rotate(-45deg) translate(35px, 35px);
+}
+
+.table {
+  -webkit-animation: fadeIn 150ms ease-in 100ms forwards;
+          animation: fadeIn 150ms ease-in 100ms forwards;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 5em;
+  position: absolute;
+  height: 80vh;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  z-index: -1;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+h3 {
+  font-family: Kurye;
+  color: #d8ecd6;
+  font-size: 1.5em;
+}
+
+div > img {
+  height: 200px;
+  width: auto;
+}
+
+.table > .player > #your-cards,
+.table > .dealer > #dealer-cards {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  gap: 5px;
+}
+
+.btn-box {
+  -webkit-animation: fadeIn 200ms ease-out 100ms forwards;
+          animation: fadeIn 200ms ease-out 100ms forwards;
+  position: absolute;
+  top: 50%;
+  left: 70%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 20px;
+}
+
+.btn-box > button {
+  height: 75px;
+  width: 75px;
+  background-color: transparent;
+  border: none;
+  font-family: Konstarica;
+  color: #d1df7e;
+  font-size: 2rem;
+  position: relative;
+  font-weight: bold;
+  font-size: 2.5rem;
+  margin: 0 auto;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.btn-box > button > .split-text {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  line-height: 1;
+  -webkit-transition: color 0ms 200ms;
+  transition: color 0ms 200ms;
+}
+
+.btn-box > button:hover > .split-text {
+  color: transparent;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-transition-delay: 200ms;
+          transition-delay: 200ms;
+}
+
+.btn-box > button > .split-text::before,
+.btn-box > button > .split-text::after {
+  position: absolute;
+  content: attr(data-text);
+  height: calc(0.5em);
+  overflow: hidden;
+  left: 0;
+  right: 0;
+  color: var(--text-color);
+  -webkit-transition: color 100ms ease-in-out transform 100ms ease-in-out;
+  transition: color 100ms ease-in-out transform 100ms ease-in-out;
+  opacity: 0;
+}
+
+.btn-box > button:hover > .split-text::after,
+.btn-box > button:hover > .split-text::before {
+  opacity: 1;
+  color: white;
+  -webkit-transform: skewX(15deg);
+          transform: skewX(15deg);
+}
+
+.btn-box > button:hover > .split-text::before {
+  -webkit-animation: skew-left 200ms ease-in-out forwards;
+          animation: skew-left 200ms ease-in-out forwards;
+}
+
+.btn-box > button:hover > .split-text::after {
+  bottom: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  -webkit-animation: skew-left 200ms ease-in-out forwards;
+          animation: skew-left 200ms ease-in-out forwards;
+}
+
+@-webkit-keyframes skew-left {
+  100% {
+    -webkit-transform: skewX(15deg);
+            transform: skewX(15deg);
+    color: white;
+  }
+}
+
+@keyframes skew-left {
+  100% {
+    -webkit-transform: skewX(15deg);
+            transform: skewX(15deg);
+    color: white;
+  }
+}
+
+.btn-box > button::before {
+  position: absolute;
+  content: "";
+  width: 105%;
+  left: -5%;
+  top: 50%;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  height: 2px;
+  background-color: var(--text-color);
+  border-radius: 50%;
+  z-index: 1;
+  -webkit-transition: -webkit-transform 200ms ease-in-out;
+  transition: -webkit-transform 200ms ease-in-out;
+  transition: transform 200ms ease-in-out;
+  transition: transform 200ms ease-in-out, -webkit-transform 200ms ease-in-out;
+}
+
+.btn-box > button:hover::before {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+/*# sourceMappingURL=inGame_styles.css.map */
