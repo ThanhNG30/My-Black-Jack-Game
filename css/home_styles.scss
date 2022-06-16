@@ -1,0 +1,91 @@
+@font-face {
+  font-family: Kurye;
+  src: url(../assets/Kurye-Light.otf);
+}
+
+@font-face {
+  font-family: Konstarica;
+  src: url(../assets/Konstarica.otf);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-image: url(../assets/bg.png);
+  background-size: 100% auto;
+}
+
+.text {
+  font-family: Kurye;
+  color: rgb(216, 236, 214);
+  font-size: 1.5em;
+  text-shadow: 5px 5px 15px rgba(255, 255, 255, 0.488);
+}
+
+.center {
+  height: 30vh;
+  width: fit-content;
+  background-color: transparent;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: baseline;
+  align-items: center;
+  animation: float-down 2s ease-in forwards;
+}
+
+.btn {
+  font-family: Kurye;
+  background-color: transparent;
+  color: #222;
+  border: none;
+  outline: none;
+  position: relative;
+  cursor: pointer;
+  font-size: 4em;
+  color: #22b387;
+  --accent-color: #0b3b2d;
+}
+
+.btn.btn-play::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 3px;
+  height: 5px;
+  background-color: var(--accent-color);
+  transition: transform 300ms ease-in-out;
+
+  transform: scaleX(0);
+}
+
+.btn.btn-play:hover::before,
+.btn.btn-play:focus::before {
+  transform: scaleX(1);
+}
+
+#title {
+  font-family: Konstarica;
+  color: #d1df7e;
+  font-size: 8em;
+}
+
+@keyframes float-down {
+  0% {
+    opacity: 0;
+    top: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
