@@ -13,6 +13,9 @@ menuBtn.addEventListener("click", () => {
   }
 });
 
+//This is the modal
+const modal = document.querySelector(".modal");
+
 //Chips that the player has
 var bank;
 
@@ -217,7 +220,8 @@ var start = false;
 var dealerAceCount = 0;
 var yourAceCount = 0;
 
-var hidden;
+var hidden; //Dealer's hidden card
+var playerHiddenCard = document.getElementById("player-hidden");
 var deck;
 
 var canHit = false; //allows the player (you) to draw while yourSum <= 21 only when game starts.
@@ -284,6 +288,7 @@ function startGame() {
     } else {
       alert(`You have bet ${betAmount} dollars! Let's play!`);
       start = true;
+      document.getElementById("doneBetting").style.display = "none";
       canBet = false;
       console.log(`Start = ${start}`);
       canHit = true;
@@ -293,6 +298,7 @@ function startGame() {
       hidden = deck.pop();
       dealerSum += getValue(hidden);
       dealerAceCount += checkAce(hidden);
+      playerHiddenCard.remove();
 
       while (dealerSum < 17) {
         //<img src="./cards/4-C.png">
@@ -358,7 +364,7 @@ function stay() {
   yourSum = reduceAce(yourSum, yourAceCount);
 
   canHit = false;
-  document.getElementById("hidden").src = "./cards/" + hidden + ".png";
+  document.getElementById("dealer-hidden").src = "./cards/" + hidden + ".png";
 
   let message = "";
   //When you or dealer sum is over 21.
@@ -391,7 +397,7 @@ function stay() {
     console.log(results.currentResult);
     //window.location.reload();
   });
-  btnBox.appendChild(playAgainBtn);
+  //btnBox.appendChild(playAgainBtn);
 }
 
 function getValue(card) {
@@ -528,14 +534,3 @@ function restartGame() {
   bankAccount();
   console.log(bank);
 }
-
-const doneBettingBtn = document.getElementById("doneBetting");
-doneBettingBtn.addEventListener("click", function () {
-  if (doneBettingBtn.style.display == "block") {
-    doneBettingBtn.classList.add("hidden"); //the Play button disappears and game starts.
-    //startGame = true;
-  } else {
-    doneBettingBtn.classList.remove("hidden"); //the Play button is shown knowing that game hasn't start.
-    //startGame = false;
-  }
-});
