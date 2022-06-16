@@ -44,6 +44,7 @@ body {
   z-index: -1;
 }
 
+//This is the menu bar
 .menu-btn {
   position: absolute;
   top: 50px;
@@ -117,6 +118,19 @@ body {
   transform: rotate(-45deg) translate(35px, 35px);
 }
 // Do not touch the upper part
+
+//This is the modal
+.modal {
+  height: 95vh;
+  width: 95vw;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: auto;
+  //z-index: -1;
+  background-color: rgba(47, 255, 95, 0.2);
+}
 
 // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////@at-root
 //This part is for the cards
@@ -295,13 +309,29 @@ div > img {
   left: 10%;
   height: max-content;
   width: 300px;
+  display: grid;
   grid-template-columns: 100px 100px 100px;
   grid-template-rows: auto auto;
+  grid-template-areas: "10 25 50" "100 250 500";
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+.chips > div {
+  text-align: center;
 }
 .chips > div > button {
+  width: 100px;
   background: rgba(47, 255, 95, 0.2);
   border-radius: 10%;
   color: #fff;
   font-size: 1.4rem;
   padding: 10px;
+}
+
+// This is the result message
+#results {
+  font-family: Kurye;
+  color: #fff;
+  font-size: 1.4rem;
 }

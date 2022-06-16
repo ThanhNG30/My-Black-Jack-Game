@@ -15,6 +15,9 @@
       <div class="menu-btn__burger"></div>
     </div>
 
+    <!-- This is the modal show up when you click on the menu btn -->
+    <div class="modal">Let's play again!</div>
+
     <!-- Do not change the upper part.-->
 
     <!-- This is the layout of the game, you can modify. -->
@@ -23,14 +26,14 @@
       <div class="dealer">
         <h3 id="dealer">Dealer: <span id="dealer-sum"></span></h3>
         <div id="dealer-cards">
-          <img id="hidden" src="./cards/BACK.png" />
+          <img id="dealer-hidden" src="./cards/BACK.png" />
         </div>
       </div>
       <p id="results"></p>
       <div class="player">
         <h3 id="player">You: <span id="your-sum"></span></h3>
         <div id="your-cards">
-          <img id="hidden" src="./cards/BACK.png" />
+          <img id="player-hidden" src="./cards/BACK.png" />
         </div>
       </div>
     </div>
@@ -53,7 +56,7 @@
       Total Money: <span id="bank"></span> <br />
       Money Bet: <span id="betMoney"></span>
     </div>
-    <button id="doneBetting" onclick="">Play</button>
+    <button id="doneBetting">Play</button>
 
     <div class="chips">
       <div id="10">

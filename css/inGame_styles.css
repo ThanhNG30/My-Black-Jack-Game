@@ -151,6 +151,18 @@ body {
   transform: rotate(-45deg) translate(35px, 35px);
 }
 
+.modal {
+  height: 95vh;
+  width: 95vw;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  overflow: auto;
+  background-color: rgba(47, 255, 95, 0.2);
+}
+
 .table {
   -webkit-animation: fadeIn 150ms ease-in 100ms forwards;
           animation: fadeIn 150ms ease-in 100ms forwards;
@@ -382,17 +394,38 @@ div > img {
   height: -moz-max-content;
   height: max-content;
   width: 300px;
+  display: -ms-grid;
+  display: grid;
   -ms-grid-columns: 100px 100px 100px;
       grid-template-columns: 100px 100px 100px;
   -ms-grid-rows: auto auto;
       grid-template-rows: auto auto;
+      grid-template-areas: "10 25 50" "100 250 500";
+  gap: 10px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.chips > div {
+  text-align: center;
 }
 
 .chips > div > button {
+  width: 100px;
   background: rgba(47, 255, 95, 0.2);
   border-radius: 10%;
   color: #fff;
   font-size: 1.4rem;
   padding: 10px;
+}
+
+#results {
+  font-family: Kurye;
+  color: #fff;
+  font-size: 1.4rem;
 }
 /*# sourceMappingURL=inGame_styles.css.map */
