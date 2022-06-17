@@ -2,19 +2,25 @@ import * as results from "./result.js";
 
 //This is the nav menu
 const menuBtn = document.querySelector(".menu-btn");
+const modal = document.querySelector(".modal");
 let menuOpen = false;
 menuBtn.addEventListener("click", () => {
   if (!menuOpen) {
     menuBtn.classList.add("open");
+    modal.style.display = "block";
     menuOpen = true;
   } else {
     menuBtn.classList.remove("open");
+    modal.style.display = "none";
     menuOpen = false;
   }
 });
 
-//This is the modal
-const modal = document.querySelector(".modal");
+//This is the buttons in the modal
+const homeBtn = document.getElementById("homeBtn");
+homeBtn.addEventListener("click", function () {
+  window.location.replace("../home.html");
+});
 
 //Chips that the player has
 var bank;
@@ -231,8 +237,19 @@ var canStay = false; //will allow the player to click when game starts.
 window.onload = function () {
   buildDeck();
   shuffleDeck();
-  console.log(`Current Result is ${results.currentResult}`);
-  restartGame();
+  console.log(
+    localStorage.getItem("chips") + "<br>" + localStorage.getItem("moneyInBank")
+  );
+  if (typeof Storage !== "undefined" || typeof Storage !== "") {
+    chips = localStorage.getItem("chips");
+    console.log("The betting chips have been updated.");
+    //bank = localStorage.getItem("moneyInBank");
+    bankAccount();
+    console.log("The money in the bank has been updated.");
+  } else {
+    console.log("There is nothing stored in local storage.");
+    bankAccount();
+  }
   startGame();
   // debugger;
 };
@@ -385,19 +402,20 @@ function stay() {
   document.getElementById("your-sum").innerText = yourSum;
   document.getElementById("results").innerText = message;
 
-  var playAgainBtn = document.createElement("button");
-  playAgainBtn.id = "play-again";
-
-  const btnBox = document.getElementById("btn-box");
-  playAgainBtn.innerText = "Play again";
-
-  playAgainBtn.addEventListener("click", () => {
-    results.giveResult();
-    restartGame();
-    console.log(results.currentResult);
-    //window.location.reload();
-  });
-  //btnBox.appendChild(playAgainBtn);
+  results.giveResult();
+  restartGame();
+  console.log(results.currentResult);
+  if (typeof Storage !== "undefined") {
+    localStorage.setItem("moneyInBank", bank);
+    console.log("The money in the bank has been updated.");
+    localStorage.setItem("chips", chips);
+    console.log("The betting chips have been updated.");
+    localStorage.setItem("previousResult", results.currentResult);
+    console.log("The previous result has been updated.");
+  } else {
+    console.log("Sorry! No Web Storage support..");
+  }
+  window.location.reload();
 }
 
 function getValue(card) {

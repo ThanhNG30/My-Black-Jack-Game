@@ -20,6 +20,7 @@
   }
 }
 body {
+  overflow: hidden;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -47,10 +48,11 @@ body {
 //This is the menu bar *need to change the z-index
 .menu-btn {
   position: absolute;
-  top: 50px;
-  right: 10px;
+  top: 60px;
+  right: 40px;
   width: 80px;
   height: 80px;
+  z-index: 100;
   cursor: pointer;
   -webkit-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;
@@ -121,6 +123,7 @@ body {
 
 //This is the modal
 .modal {
+  display: none;
   height: 95vh;
   width: 95vw;
   position: absolute;
@@ -128,10 +131,44 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   overflow: auto;
-  //z-index: -1;
-  background-color: rgba(47, 255, 95, 0.2);
+  z-index: 10;
+  background-color: rgba(46, 104, 59, 0.747);
+  text-align: center;
+  height: 95vh;
+  //line-height: 95vh;
+  font-family: Konstarica;
+  font-size: 4rem;
+  color: #d1df7e;
+  text-shadow: 5px 5px 15px rgba(255, 255, 255, 0.488);
+}
+.modal > button {
+  background-color: rgba(255, 255, 255, 0.589);
+  border: 1px solid rgba(255, 255, 255, 0.589);
+  box-shadow: 5px 5px 15px rgba(255, 255, 255, 0.488);
+  font-family: Konstarica;
+  color: #000;
+  font-size: 2rem;
 }
 
+.modal::-webkit-scrollbar {
+  display: none; /*The page's scroll bar is hidden*/
+}
+// .modal > button {
+//   height: 75px;
+//   width: 75px;
+//   background-color: transparent;
+//   border: 1px solid rgba(255, 255, 255, 0.589);
+//   box-shadow: 5px 5px 15px rgba(255, 255, 255, 0.488);
+//   font-family: Konstarica;
+//   color: #d1df7e;
+//   font-size: 2rem;
+
+//   position: relative;
+//   font-weight: bold;
+//   font-size: 2.5rem;
+//   margin: 0 auto;
+//   width: max-content;
+// }
 // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////@at-root
 //This part is for the cards
 .table {
@@ -170,6 +207,7 @@ div > img {
 
 //This part is for the buttons
 .btn-box {
+  z-index: 0;
   animation: fadeIn 200ms ease-out 100ms forwards;
   position: absolute;
   top: 50%;
@@ -257,7 +295,7 @@ div > img {
   height: 2px;
   background-color: var(--text-color);
   border-radius: 50%;
-  z-index: 1;
+  z-index: 0;
   transition: transform 200ms ease-in-out;
 }
 .btn-box > button:hover::before {
@@ -334,4 +372,23 @@ div > img {
   font-family: Kurye;
   color: #fff;
   font-size: 1.4rem;
+}
+
+/*This is for the Play Again button */
+#play-again {
+  display: block;
+  position: absolute !important;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 75px;
+  width: 75px;
+  background-color: transparent;
+  border: none;
+  font-family: Konstarica;
+  color: #d1df7e;
+  font-size: 2rem;
+  font-weight: bold;
+  font-size: 2.5rem;
+  z-index: 100;
 }
