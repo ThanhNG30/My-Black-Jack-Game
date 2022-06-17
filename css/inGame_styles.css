@@ -27,6 +27,7 @@
 }
 
 body {
+  overflow: hidden;
   margin: 0;
   padding: 0;
   -webkit-box-sizing: border-box;
@@ -66,10 +67,11 @@ body {
 
 .menu-btn {
   position: absolute;
-  top: 50px;
-  right: 10px;
+  top: 60px;
+  right: 40px;
   width: 80px;
   height: 80px;
+  z-index: 100;
   cursor: pointer;
   -webkit-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;
@@ -152,6 +154,7 @@ body {
 }
 
 .modal {
+  display: none;
   height: 95vh;
   width: 95vw;
   position: absolute;
@@ -160,7 +163,29 @@ body {
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
   overflow: auto;
-  background-color: rgba(47, 255, 95, 0.2);
+  z-index: 10;
+  background-color: rgba(46, 104, 59, 0.747);
+  text-align: center;
+  height: 95vh;
+  font-family: Konstarica;
+  font-size: 4rem;
+  color: #d1df7e;
+  text-shadow: 5px 5px 15px rgba(255, 255, 255, 0.488);
+}
+
+.modal > button {
+  background-color: rgba(255, 255, 255, 0.589);
+  border: 1px solid rgba(255, 255, 255, 0.589);
+  -webkit-box-shadow: 5px 5px 15px rgba(255, 255, 255, 0.488);
+          box-shadow: 5px 5px 15px rgba(255, 255, 255, 0.488);
+  font-family: Konstarica;
+  color: #000;
+  font-size: 2rem;
+}
+
+.modal::-webkit-scrollbar {
+  display: none;
+  /*The page's scroll bar is hidden*/
 }
 
 .table {
@@ -216,6 +241,7 @@ div > img {
 }
 
 .btn-box {
+  z-index: 0;
   -webkit-animation: fadeIn 200ms ease-out 100ms forwards;
           animation: fadeIn 200ms ease-out 100ms forwards;
   position: absolute;
@@ -338,7 +364,7 @@ div > img {
   height: 2px;
   background-color: var(--text-color);
   border-radius: 50%;
-  z-index: 1;
+  z-index: 0;
   -webkit-transition: -webkit-transform 200ms ease-in-out;
   transition: -webkit-transform 200ms ease-in-out;
   transition: transform 200ms ease-in-out;
@@ -427,5 +453,25 @@ div > img {
   font-family: Kurye;
   color: #fff;
   font-size: 1.4rem;
+}
+
+/*This is for the Play Again button */
+#play-again {
+  display: block;
+  position: absolute !important;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  height: 75px;
+  width: 75px;
+  background-color: transparent;
+  border: none;
+  font-family: Konstarica;
+  color: #d1df7e;
+  font-size: 2rem;
+  font-weight: bold;
+  font-size: 2.5rem;
+  z-index: 100;
 }
 /*# sourceMappingURL=inGame_styles.css.map */
