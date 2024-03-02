@@ -9,17 +9,12 @@
 }
 
 body {
-  height: 100vh;
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  gap: 0px;
-  justify-content: center;
-  align-items: center;
-  background-image: url(../assets/game_bg.png);
+  background-image: url(../assets/howToPlay_bg.png);
   background-size: 100% auto;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
 }
 
 #title {
@@ -34,32 +29,60 @@ body {
   z-index: -1;
 }
 
-h2 {
-  //How to play
-  padding-top: 150px;
-  font-family: Konstarica;
-  color: #d1df7e;
-  font-size: 5em;
-}
+.instruction {
+  width: 60vw;
+  height: 80vh;
+  position: fixed;
 
-p {
-  background-color: rgba(216, 236, 214, 0.2);
-  border-radius: 10%;
+  background-color: rgba(216, 236, 214, 0.548);
+  // border: 10px hidden rgba($color: #22b38811, $alpha: 0.15);
+  border: 30px solid rgba(255, 255, 255, 0);
+  border-radius: 30px;
   padding: 30px 25px;
-  //Instructions
-  width: 40vw;
+
+  overflow-y: scroll;
+
   font-family: Kurye;
-  color: rgb(216, 236, 214);
+  // color: rgb(216, 236, 214);
   font-size: 1.5em;
   text-shadow: 5px 5px 15px rgba(255, 255, 255, 0.488);
   animation: openUp 300ms 100ms ease-in forwards;
 }
 
+// Scrollbar Style
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #d1df7eaa;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(216, 236, 214, 0);
+  border-radius: 2px;
+}
+
+#howToPlayTxt {
+  //How to play
+  padding-top: 150px;
+  font-family: Konstarica;
+  z-index: 1000;
+  color: #d1df7e;
+  font-size: 5em;
+}
+
+// 'I got it!' btn turned into 'Let's play!'
 p > #iGotIt::before {
+  font-weight: 500;
+  font-style: italic;
+
   content: "I got it!";
 }
 
 p > #iGotIt:hover::before {
+  font-style: italic;
+  font-weight: 500;
   animation: changeContent 250ms ease-in-out forwards;
 }
 

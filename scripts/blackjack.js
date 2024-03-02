@@ -1,19 +1,21 @@
-import * as results from "./result.js";
+import * as results from "./result.js"; //this contains the checkResult function
 
-//This is the nav menu
-const menuBtn = document.querySelector(".menu-btn");
-let menuOpen = false;
-menuBtn.addEventListener("click", () => {
-  if (!menuOpen) {
-    menuBtn.classList.add("open");
-    menuOpen = true;
-  } else {
-    menuBtn.classList.remove("open");
-    menuOpen = false;
-  }
-});
+const playBtnBtn = document.getElementById("playBtn");
+var dealerSum = 0;
+var yourSum = 0;
+var start = false;
 
-//Chips that the player has
+var dealerAceCount = 0;
+var yourAceCount = 0;
+
+var hiddenVal;
+var yourHiddenCard = document.getElementById("your-hidden");
+var deck;
+
+var canHit = false; //allows the player (you) to draw while yourSum <= 21 only when game starts.
+var canSplit = false; //only allow the player (you) to split when they have 2 of the same value
+var canStay = false; //will allow the player to click when game starts.
+var canBet = true; //allow the player to bet at the beginning
 var bank;
 
 var chips = [
@@ -38,8 +40,22 @@ var hundredChip = document.getElementById("100");
 var twohundredfiftyChip = document.getElementById("250");
 var fivehundredChip = document.getElementById("500");
 
-var canBet = true;
 var betAmount = 0;
+
+//This is the nav menu
+const menuBtn = document.querySelector(".menu-btn");
+let menuOpen = false;
+menuBtn.addEventListener("click", () => {
+  if (!menuOpen) {
+    menuBtn.classList.add("open");
+    menuOpen = true;
+  } else {
+    menuBtn.classList.remove("open");
+    menuOpen = false;
+  }
+});
+
+//Chips that the player has
 
 function bankAccount() {
   bank = 0;
@@ -175,7 +191,7 @@ function bet() {
   });
 
   //When player committed their bet amount, the game starts.
-  document.getElementById("doneBetting").addEventListener("click", function () {
+  document.getElementById("playBtn").addEventListener("click", function () {
     if (betAmount == 0) {
       console.log(
         "You have not bet. Click on the chip for how much you want to bet."
@@ -209,20 +225,8 @@ function updateBetAmount(amount) {
   document.getElementById("betMoney").innerHTML = betAmount;
 }
 
-/*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-var dealerSum = 0;
-var yourSum = 0;
-var start = false;
-
-var dealerAceCount = 0;
-var yourAceCount = 0;
-
-var hidden;
-var deck;
-
-var canHit = false; //allows the player (you) to draw while yourSum <= 21 only when game starts.
-var canSplit = false; //only allow the player (you) to split when they have 2 of the same value
-var canStay = false; //will allow the player to click when game starts.
+// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 window.onload = function () {
   buildDeck();
@@ -249,12 +253,12 @@ function buildDeck() {
     "Q",
     "K",
   ];
-  let types = ["C", "D", "H", "S"];
+  let types = ["C", "D", "H", "S"]; //C for Clubs, D for Diamonds, H for Hearts, S for Spades
   deck = [];
 
   for (let i = 0; i < types.length; i++) {
     for (let j = 0; j < values.length; j++) {
-      deck.push(values[j] + "-" + types[i]); //A-C -> K-C, A-D -> K-D
+      deck.push(values[j] + "-" + types[i]); //The deck is generated from Ace-Clubs to King-Spades
     }
   }
   // console.log(deck);
@@ -262,20 +266,31 @@ function buildDeck() {
 
 function shuffleDeck() {
   for (let i = 0; i < deck.length; i++) {
-    let j = Math.floor(Math.random() * deck.length); // (0-1) * 52 => (0-51.9999)
+    let j = Math.floor(Math.random() * deck.length);
     let temp = deck[i];
     deck[i] = deck[j];
     deck[j] = temp;
   }
-  console.log(deck);
+  // console.log(deck);
 }
+
+playBtnBtn.addEventListener("click", function () {
+  if (playBtnBtn.style.display == "block") {
+    playBtnBtn.classList.add("hidden"); //the Play button disappears and game starts.
+    //startGame = true;
+  } else {
+    playBtnBtn.classList.remove("hidden"); //the Play button is shown knowing that game hasn't start.
+    //startGame = false;
+  }
+});
 
 function startGame() {
   alert("Bet money to start game.");
   canBet = true;
   updateBetAmount(0);
   bet();
-  document.getElementById("doneBetting").addEventListener("click", function () {
+  // When the 'play' btn is hit
+  document.getElementById("playBtn").addEventListener("click", function () {
     if (betAmount == 0) {
       alert(
         "You have not bet. Click on the chip for how much you want to bet."
@@ -283,6 +298,7 @@ function startGame() {
       start = false;
     } else {
       alert(`You have bet ${betAmount} dollars! Let's play!`);
+      this.classList.add("hidden"); //Hide the 'play' btn when start playing
       start = true;
       canBet = false;
       console.log(`Start = ${start}`);
@@ -290,9 +306,10 @@ function startGame() {
       canStay = true;
 
       //Game starts
-      hidden = deck.pop();
-      dealerSum += getValue(hidden);
-      dealerAceCount += checkAce(hidden);
+      hiddenVal = deck.pop(); //Assign value to dealer's hidden card without showing the card to the player
+      dealerSum += getValue(hiddenVal);
+      dealerAceCount += checkAce(hiddenVal);
+      yourHiddenCard.parentNode.removeChild(yourHiddenCard);
 
       while (dealerSum < 17) {
         //<img src="./cards/4-C.png">
@@ -358,7 +375,8 @@ function stay() {
   yourSum = reduceAce(yourSum, yourAceCount);
 
   canHit = false;
-  document.getElementById("hidden").src = "./cards/" + hidden + ".png";
+  document.getElementById("dealer-hidden").src =
+    "./cards/" + hiddenVal + ".png";
 
   let message = "";
   //When you or dealer sum is over 21.
@@ -386,7 +404,7 @@ function stay() {
   playAgainBtn.innerText = "Play again";
 
   playAgainBtn.addEventListener("click", () => {
-    results.giveResult();
+    results.giveResult(); //from file result.js
     restartGame();
     console.log(results.currentResult);
     //window.location.reload();
@@ -528,14 +546,3 @@ function restartGame() {
   bankAccount();
   console.log(bank);
 }
-
-const doneBettingBtn = document.getElementById("doneBetting");
-doneBettingBtn.addEventListener("click", function () {
-  if (doneBettingBtn.style.display == "block") {
-    doneBettingBtn.classList.add("hidden"); //the Play button disappears and game starts.
-    //startGame = true;
-  } else {
-    doneBettingBtn.classList.remove("hidden"); //the Play button is shown knowing that game hasn't start.
-    //startGame = false;
-  }
-});
