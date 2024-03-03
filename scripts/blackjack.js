@@ -1,6 +1,13 @@
-import * as results from "./result.js"; //this contains the checkResult function
+import * as results from "./result.js"; //this contains the recorded results
+import * as BankAccount from "./bankAccount.js"; //this contains the bank and allow betting
 
-const playBtnBtn = document.getElementById("playBtn");
+const PLAY_BTN = document.getElementById("playBtn");
+const HIT_BTN = document.getElementById("hit");
+const STAY_BTN = document.getElementById("stay");
+const SPLIT_BTN = document.getElementById("split");
+const DEALER_SUM_ID = document.getElementById("dealer-sum");
+const PLAYER_SUM_ID = document.getElementById("your-sum");
+
 var dealerSum = 0;
 var yourSum = 0;
 var start = false;
@@ -15,32 +22,6 @@ var deck;
 var canHit = false; //allows the player (you) to draw while yourSum <= 21 only when game starts.
 var canSplit = false; //only allow the player (you) to split when they have 2 of the same value
 var canStay = false; //will allow the player to click when game starts.
-var canBet = true; //allow the player to bet at the beginning
-var bank;
-
-var chips = [
-  //Row [0] - tenChips
-  [10, 10, 10, 10, 10],
-  //Row [1] - twentyfiveChips
-  [25, 25, 25, 25],
-  //Row [2] - fiftyChips, etc.
-  [50, 50, 50],
-  //Row [3] - hundredChips
-  [100, 100],
-  //Row [4] - twohundredfiftyChips
-  [250, 250],
-  //Row [5] - fivehundredChips
-  [500, 500],
-];
-
-var tenChip = document.getElementById("10");
-var twentyfiveChip = document.getElementById("25");
-var fiftyChip = document.getElementById("50");
-var hundredChip = document.getElementById("100");
-var twohundredfiftyChip = document.getElementById("250");
-var fivehundredChip = document.getElementById("500");
-
-var betAmount = 0;
 
 //This is the nav menu
 const menuBtn = document.querySelector(".menu-btn");
@@ -55,184 +36,11 @@ menuBtn.addEventListener("click", () => {
   }
 });
 
-//Chips that the player has
-
-function bankAccount() {
-  bank = 0;
-  for (var i = 0; i < chips.length; i++) {
-    for (var l = 0; l < chips[i].length; l++) {
-      bank += chips[i][l];
-    }
-    updateBankAccount();
-  }
-}
-
-function bet() {
-  if (betAmount == 0) {
-    alert("Click on the chip for how much you want to bet.");
-    updateBetAmount(0);
-    console.log(chips);
-  }
-
-  tenChip.addEventListener("click", function () {
-    if (canBet && betAmount == 0) {
-      checkBalance();
-      updateBetAmount(10);
-      bank -= 10;
-      chips[0].splice(0, 1);
-      console.log(chips[0]);
-      updateBankAccount();
-    } else if (canBet && betAmount != 0) {
-      if (
-        confirm("You have chosen an amount. Do you want to change?") == true
-      ) {
-        alert("Click on the chip for how much you want to bet.");
-        updateBetAmount(0);
-        bankAccount();
-      }
-    } else {
-      alert("Sorry, you cannot bet anymore.");
-    }
-  });
-  twentyfiveChip.addEventListener("click", function () {
-    if (canBet && betAmount == 0) {
-      checkBalance();
-      updateBetAmount(25);
-      bank -= 25;
-      console.log(chips[1]);
-      updateBankAccount();
-    } else if (canBet && betAmount != 0) {
-      if (
-        confirm("You have chosen an amount. Do you want to change?") == true
-      ) {
-        alert("Click on the chip for how much you want to bet.");
-        updateBetAmount(0);
-        bankAccount();
-      }
-    } else {
-      alert("Sorry, you cannot bet anymore.");
-    }
-  });
-  fiftyChip.addEventListener("click", function () {
-    if (canBet && betAmount == 0) {
-      checkBalance();
-      updateBetAmount(50);
-      bank -= 50;
-      console.log(chips[2]);
-      updateBankAccount();
-    } else if (canBet && betAmount != 0) {
-      if (
-        confirm("You have chosen an amount. Do you want to change?") == true
-      ) {
-        alert("Click on the chip for how much you want to bet.");
-        updateBetAmount(0);
-        bankAccount();
-      }
-    } else {
-      alert("Sorry, you cannot bet anymore.");
-    }
-  });
-  hundredChip.addEventListener("click", function () {
-    if (canBet && betAmount == 0) {
-      checkBalance();
-      updateBetAmount(100);
-      bank -= 100;
-      console.log(chips[3]);
-      updateBankAccount();
-    } else if (canBet && betAmount != 0) {
-      if (
-        confirm("You have chosen an amount. Do you want to change?") == true
-      ) {
-        alert("Click on the chip for how much you want to bet.");
-        updateBetAmount(0);
-        bankAccount();
-      }
-    } else {
-      alert("Sorry, you cannot bet anymore.");
-    }
-  });
-  twohundredfiftyChip.addEventListener("click", function () {
-    if (canBet && betAmount == 0) {
-      checkBalance();
-      updateBetAmount(250);
-      bank -= 250;
-      console.log(chips[4]);
-      updateBankAccount();
-    } else if (canBet && betAmount != 0) {
-      if (
-        confirm("You have chosen an amount. Do you want to change?") == true
-      ) {
-        alert("Click on the chip for how much you want to bet.");
-        updateBetAmount(0);
-        bankAccount();
-      }
-    } else {
-      alert("Sorry, you cannot bet anymore.");
-    }
-  });
-  fivehundredChip.addEventListener("click", function () {
-    if (canBet && betAmount == 0) {
-      checkBalance();
-      updateBetAmount(500);
-      bank -= 500;
-      console.log(chips[5]);
-      updateBankAccount();
-    } else if (canBet && betAmount != 0) {
-      if (
-        confirm("You have chosen an amount. Do you want to change?") == true
-      ) {
-        alert("Click on the chip for how much you want to bet.");
-        updateBetAmount(0);
-        bankAccount();
-      }
-    } else {
-      alert("Sorry, you cannot bet anymore.");
-    }
-  });
-
-  //When player committed their bet amount, the game starts.
-  document.getElementById("playBtn").addEventListener("click", function () {
-    if (betAmount == 0) {
-      console.log(
-        "You have not bet. Click on the chip for how much you want to bet."
-      );
-    } else {
-      start = true;
-      canBet = false;
-    }
-  });
-}
-
-function checkBalance() {
-  if (bank < parseInt(document.getElementById("betMoney").innerHTML)) {
-    canBet = false;
-    alert("You have no money left! Go sell your kidney!");
-  } else {
-    canBet = true;
-  }
-}
-
-function updateBankAccount() {
-  if (bank <= 0) {
-    document.getElementById("bank").innerHTML = 0;
-  } else {
-    document.getElementById("bank").innerHTML = bank;
-  }
-}
-
-function updateBetAmount(amount) {
-  betAmount = amount;
-  document.getElementById("betMoney").innerHTML = betAmount;
-}
-
-// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 window.onload = function () {
   buildDeck();
   shuffleDeck();
   console.log(`Current Result is ${results.currentResult}`);
-  restartGame();
+  //restartGame();
   startGame();
   // debugger;
 };
@@ -261,7 +69,7 @@ function buildDeck() {
       deck.push(values[j] + "-" + types[i]); //The deck is generated from Ace-Clubs to King-Spades
     }
   }
-  // console.log(deck);
+  console.log("Done building deck of cards.");
 }
 
 function shuffleDeck() {
@@ -271,36 +79,37 @@ function shuffleDeck() {
     deck[i] = deck[j];
     deck[j] = temp;
   }
-  // console.log(deck);
+  console.log("Done shuffling cards.");
+  console.log(`Can I bet = ${BankAccount.canBet}`);
 }
 
-playBtnBtn.addEventListener("click", function () {
-  if (playBtnBtn.style.display == "block") {
-    playBtnBtn.classList.add("hidden"); //the Play button disappears and game starts.
-    //startGame = true;
-  } else {
-    playBtnBtn.classList.remove("hidden"); //the Play button is shown knowing that game hasn't start.
-    //startGame = false;
-  }
-});
+// playBtn.addEventListener("click", function () { //???
+//   if (playBtn.style.display == "block") {
+//     playBtn.classList.add("hidden"); //the Play button disappears and game starts.
+//     //startGame = true;
+//   } else {
+//     playBtn.classList.remove("hidden"); //the Play button is shown knowing that game hasn't start.
+//     //startGame = false;
+//   }
+// });
 
 function startGame() {
-  alert("Bet money to start game.");
-  canBet = true;
-  updateBetAmount(0);
-  bet();
+  BankAccount.bankAccount();
+  BankAccount.updateBetAmount(0);
+  BankAccount.bet();
+
   // When the 'play' btn is hit
-  document.getElementById("playBtn").addEventListener("click", function () {
-    if (betAmount == 0) {
+  PLAY_BTN.addEventListener("click", function () {
+    if (BankAccount.betAmount == 0) {
       alert(
         "You have not bet. Click on the chip for how much you want to bet."
       );
       start = false;
     } else {
-      alert(`You have bet ${betAmount} dollars! Let's play!`);
+      alert(`You have bet ${BankAccount.betAmount} dollars! Let's play!`);
       this.classList.add("hidden"); //Hide the 'play' btn when start playing
       start = true;
-      canBet = false;
+      BankAccount.canBet = false;
       console.log(`Start = ${start}`);
       canHit = true;
       canStay = true;
@@ -335,81 +144,85 @@ function startGame() {
     }
   });
 
-  document.getElementById("hit").addEventListener("click", hit);
-  document.getElementById("stay").addEventListener("click", stay);
-  document.getElementById("split").addEventListener("click", split);
+  HIT_BTN.addEventListener("click", hit);
+  STAY_BTN.addEventListener("click", stay);
+  SPLIT_BTN.addEventListener("click", split);
 }
 
 function hit() {
-  if (!canHit) {
-    alert("Sorry, the game has not start yet.");
-    return;
-  }
+  // if (!canHit) {
+  //   alert("Sorry, the game has not start yet.");
+  //   return;
+  // }
+  while (canHit) {
+    let cardImg = document.createElement("img");
+    let card = deck.pop();
+    cardImg.src = "./cards/" + card + ".png";
+    yourSum += getValue(card);
+    yourAceCount += checkAce(card);
+    document.getElementById("your-cards").append(cardImg);
 
-  let cardImg = document.createElement("img");
-  let card = deck.pop();
-  cardImg.src = "./cards/" + card + ".png";
-  yourSum += getValue(card);
-  yourAceCount += checkAce(card);
-  document.getElementById("your-cards").append(cardImg);
-
-  if (
-    reduceAce(yourSum, yourAceCount) == 19 ||
-    reduceAce(yourSum, yourAceCount) == 20
-  ) {
-    //letting the player know that they have a better chance of winning if they don't hit.
-    confirm("Are you sure you want to hit?");
-  } else if (reduceAce(yourSum, yourAceCount) > 23) {
-    //A, J, 8 -> 1 + 10 + 8
-    canHit = false;
-    stay();
+    if (
+      reduceAce(yourSum, yourAceCount) == 19 ||
+      reduceAce(yourSum, yourAceCount) == 20
+    ) {
+      //letting the player know that they have a better chance of winning if they don't hit.
+      canHit = confirm("Are you sure you want to hit?");
+    } else if (reduceAce(yourSum, yourAceCount) > 23) {
+      //A, J, 8 -> 1 + 10 + 8
+      canHit = false;
+      stay(); //automatically end the game with the player losing
+    }
   }
 }
 
 function stay() {
-  if (!canStay) {
-    alert("Sorry, the game has not start yet.");
-    return;
-  }
+  // if (!canStay) {
+  //   alert("Sorry, the game has not start yet.");
+  //   return;
+  // }
   dealerSum = reduceAce(dealerSum, dealerAceCount);
   yourSum = reduceAce(yourSum, yourAceCount);
+  if (yourSum >= 16) canStay = true; //you can only stay when you have at least 16
 
-  canHit = false;
-  document.getElementById("dealer-hidden").src =
-    "./cards/" + hiddenVal + ".png";
+  while (canStay) {
+    canHit = false;
+    document.getElementById("dealer-hidden").src =
+      "./cards/" + hiddenVal + ".png";
 
-  let message = "";
-  //When you or dealer sum is over 21.
-  if (yourSum > 21) {
-    message = "You Lose! Want to try again?";
-  } else if (dealerSum > 21) {
-    message = "You win! Let's play another round!";
+    let message = "";
+    //When you or dealer sum is over 21.
+    if (yourSum > 21) {
+      message = "You Lose! Want to try again?";
+    } else if (dealerSum > 21) {
+      message = "You win! Let's play another round!";
+    }
+    //When you and dealer both <=21
+    else if (yourSum > dealerSum) {
+      message = "You win! Let's play another round!";
+    } else if (yourSum < dealerSum) {
+      message = "You Lose! Want to try again?";
+    } else if (yourSum == dealerSum) {
+      message = "Tie! Let's play another round!";
+    }
+    DEALER_SUM_ID.innerText = dealerSum;
+    PLAYER_SUM_ID.innerText = yourSum;
+    document.getElementById("results").innerText = message;
+
+    var playAgainBtn = document.createElement("button");
+    playAgainBtn.id = "play-again";
+
+    const btnBox = document.getElementById("btn-box");
+    playAgainBtn.innerText = "Play again";
+
+    playAgainBtn.addEventListener("click", () => {
+      results.giveResult(); //from file result.js
+      //restartGame();
+      console.log(results.currentResult);
+      //window.location.reload();
+    });
+    btnBox.appendChild(playAgainBtn);
   }
-  //When you and dealer both <=21
-  else if (yourSum > dealerSum) {
-    message = "You win! Let's play another round!";
-  } else if (yourSum < dealerSum) {
-    message = "You Lose! Want to try again?";
-  } else if (yourSum == dealerSum) {
-    message = "Tie! Let's play another round!";
-  }
-  document.getElementById("dealer-sum").innerText = dealerSum;
-  document.getElementById("your-sum").innerText = yourSum;
-  document.getElementById("results").innerText = message;
-
-  var playAgainBtn = document.createElement("button");
-  playAgainBtn.id = "play-again";
-
-  const btnBox = document.getElementById("btn-box");
-  playAgainBtn.innerText = "Play again";
-
-  playAgainBtn.addEventListener("click", () => {
-    results.giveResult(); //from file result.js
-    restartGame();
-    console.log(results.currentResult);
-    //window.location.reload();
-  });
-  btnBox.appendChild(playAgainBtn);
 }
 
 function getValue(card) {
@@ -471,10 +284,10 @@ function split() {
 function restartGame() {
   //Check for last game's result
   console.log(
-    `Bet amount is ${betAmount} and Current Result is ${results.currentResult}`
+    `Bet amount is ${BankAccount.betAmount} and Current Result is ${results.currentResult}`
   );
   if (results.currentResult == "tie") {
-    switch (betAmount) {
+    switch (BankAccount.betAmount) {
       case 10:
         chips[0].splice(0, 1, 10);
         break;
@@ -497,7 +310,7 @@ function restartGame() {
         console.log(chips);
     }
   } else if (results.currentResult == "lose") {
-    switch (betAmount) {
+    switch (BankAccount.betAmount) {
       case 10:
         chips[0].splice(0, 1);
         break;
@@ -519,7 +332,7 @@ function restartGame() {
       default:
     }
   } else if (results.currentResult == "win") {
-    switch (betAmount) {
+    switch (BankAccount.betAmount) {
       case 10:
         chips[0].splice(0, 0, 10);
         break;
@@ -541,8 +354,8 @@ function restartGame() {
       default:
     }
   }
-  console.log(chips);
+  //console.log(BankAccount.chips);
   //if there was no last game, the computer will just run this:
-  bankAccount();
-  console.log(bank);
+  //bankAccount();
+  //console.log(bank);
 }
