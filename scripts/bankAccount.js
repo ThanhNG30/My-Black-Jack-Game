@@ -14,21 +14,47 @@ var playerBalance;
 var canBet = true; //allow the player to bet at the beginning
 var betAmount = 0;
 
-var chips = [
-  //array of all the chips
-  //Row [0] - tenChips
-  [10, 10, 10, 10, 10],
-  //Row [1] - twentyfiveChips
-  [25, 25, 25, 25],
-  //Row [2] - fiftyChips, etc.
-  [50, 50, 50],
-  //Row [3] - hundredChips
-  [100, 100],
-  //Row [4] - twohundredfiftyChips
-  [250, 250],
-  //Row [5] - fivehundredChips
-  [500, 500],
-];
+export function buildChipsBank() {
+  let chips = [
+    //array of all the chips
+    //Row [0] - tenChips
+    [10, 10, 10, 10, 10],
+    //Row [1] - twentyfiveChips
+    [25, 25, 25, 25],
+    //Row [2] - fiftyChips, etc.
+    [50, 50, 50],
+    //Row [3] - hundredChips
+    [100, 100],
+    //Row [4] - twohundredfiftyChips
+    [250, 250],
+    //Row [5] - fivehundredChips
+    [500, 500],
+  ];
+
+  //   for (let rowCount = 0; rowCount < chips.length; rowCount++) {
+  //     for (
+  //       let elementCount = 0;
+  //       elementCount < chips[rowCount].length;
+  //       elementCount++
+  //     ) {
+  //       let chipImg = document.createElement("img");
+  //       switch (chips[rowCount][elementCount]) {
+  //         case 10:
+  //           chipImg.src = "./assets/red_chip.png";
+  //           TEN_CHIP.appendChild(chipImg);
+  //           break;
+  //         case 25:
+  //           chipImg.src = "./assets/blue_chip.png";
+  //           TWENTY_FIVE_CHIP.appendChild(chipImg);
+  //           break;
+  //         case 50:
+  //           chipImg.src = "./assets/green_chip.png";
+  //           FIFTY_CHIP.appendChild(chipImg);
+  //           break;
+  //       }
+  //     }
+  //   }
+}
 
 export function bankAccount() {
   //player balance is the total of all chips they have
@@ -41,15 +67,6 @@ export function bankAccount() {
   updateBankAccount();
 }
 
-function checkBalance() {
-  if (playerBalance < parseInt(MONEY_BET_ID.innerHTML)) {
-    canBet = false;
-    alert("You have no money left! Go sell your kidney!");
-  } else {
-    canBet = true;
-  }
-}
-
 function updateBankAccount() {
   if (playerBalance <= 0) {
     BANK_ID.innerHTML = 0;
@@ -59,140 +76,172 @@ function updateBankAccount() {
   console.log(`Bank account aka player balance updated: ${playerBalance}`);
 }
 
+// function checkBalance() {
+//   if (playerBalance < parseInt(MONEY_BET_ID.innerHTML)) {
+//     // Check if the bet amount is greater than the amount in player's bank account
+//     canBet = false;
+//     alert("You have no money left! Go sell your kidney!");
+//   } else {
+//     canBet = true;
+//   }
+// }
+
 export function updateBetAmount(amount) {
-  betAmount = amount;
+  betAmount += amount;
   MONEY_BET_ID.innerHTML = betAmount; //display the bet amount
   console.log(`Bet amount updated: ${amount}`);
 }
 
-export function bet() {
-  if (betAmount == 0) {
-    alert("Click on the chip for how much you want to bet.");
-    updateBetAmount(0);
-    //console.log(chips);
-  }
+// export function bet() {
+//   if (betAmount == 0) {
+//     alert("Click on the chip for how much you want to bet.");
+//     updateBetAmount(0);
+//     //console.log(chips);
+//   }
 
-  TEN_CHIP.addEventListener("click", function () {
-    if (canBet && betAmount == 0) {
-      checkBalance();
-      updateBetAmount(10);
-      chips[0].splice(0, 1); //Remove first 10 chip
-      bankAccount();
-    } else if (canBet && betAmount != 0) {
-      if (
-        confirm("You have chosen an amount. Do you want to change?") == true
-      ) {
-        //alert("Click on the chip for how much you want to bet.");
-        updateBetAmount(0);
-        chips[0].splice(0, 0, 10); //Add 10 back to row 0 of the chips arr
-        bankAccount();
-      }
-    } else {
-      alert("Sorry, you cannot bet anymore.");
-    }
-  });
-  TWENTY_FIVE_CHIP.addEventListener("click", function () {
-    if (canBet && betAmount == 0) {
-      checkBalance();
-      updateBetAmount(25);
-      bankAccount();
-    } else if (canBet && betAmount != 0) {
-      if (
-        confirm("You have chosen an amount. Do you want to change?") == true
-      ) {
-        alert("Click on the chip for how much you want to bet.");
-        updateBetAmount(0);
-        chips[0].splice(0, 0, 25); //Add 25 back to row 0 of the chips arr
-        bankAccount();
-      }
-    } else {
-      alert("Sorry, you cannot bet anymore.");
-    }
-  });
-  FIFTY_CHIP.addEventListener("click", function () {
-    if (canBet && betAmount == 0) {
-      checkBalance();
-      updateBetAmount(50);
-      bankAccount();
-    } else if (canBet && betAmount != 0) {
-      if (
-        confirm("You have chosen an amount. Do you want to change?") == true
-      ) {
-        alert("Click on the chip for how much you want to bet.");
-        updateBetAmount(0);
-        chips[0].splice(0, 0, 50); //Add 50 back to row 0 of the chips arr
-        bankAccount();
-      }
-    } else {
-      alert("Sorry, you cannot bet anymore.");
-    }
-  });
-  A_HUNDRED_CHIP.addEventListener("click", function () {
-    if (canBet && betAmount == 0) {
-      checkBalance();
-      updateBetAmount(100);
-      bankAccount();
-    } else if (canBet && betAmount != 0) {
-      if (
-        confirm("You have chosen an amount. Do you want to change?") == true
-      ) {
-        alert("Click on the chip for how much you want to bet.");
-        updateBetAmount(0);
-        chips[0].splice(0, 0, 100); //Add 100 back to row 0 of the chips arr
-        bankAccount();
-      }
-    } else {
-      alert("Sorry, you cannot bet anymore.");
-    }
-  });
-  TWO_HUNDRED_FIFTY_CHIP.addEventListener("click", function () {
-    if (canBet && betAmount == 0) {
-      checkBalance();
-      updateBetAmount(250);
-      bankAccount();
-    } else if (canBet && betAmount != 0) {
-      if (
-        confirm("You have chosen an amount. Do you want to change?") == true
-      ) {
-        alert("Click on the chip for how much you want to bet.");
-        updateBetAmount(0);
-        chips[0].splice(0, 0, 250); //Add 250 back to row 0 of the chips arr
-        bankAccount();
-      }
-    } else {
-      alert("Sorry, you cannot bet anymore.");
-    }
-  });
-  FIVE_HUNDRED_CHIP.addEventListener("click", function () {
-    if (canBet && betAmount == 0) {
-      checkBalance();
-      updateBetAmount(500);
-      bankAccount();
-    } else if (canBet && betAmount != 0) {
-      if (
-        confirm("You have chosen an amount. Do you want to change?") == true
-      ) {
-        alert("Click on the chip for how much you want to bet.");
-        updateBetAmount(0);
-        chips[0].splice(0, 0, 500); //Add 500 back to row 0 of the chips arr
-        bankAccount();
-      }
-    } else {
-      alert("Sorry, you cannot bet anymore.");
-    }
-  });
+//   TEN_CHIP.addEventListener("click", function () {
+//     if (canBet && betAmount > playerBalance) {
+//       console.log(`Player balance is = ${playerBalance}`);
 
-  //When player committed their bet amount, the game starts.
-  document.getElementById("playBtn").addEventListener("click", function () {
-    if (betAmount == 0) {
-      console.log(
-        "You have not bet. Click on the chip for how much you want to bet."
-      );
-    } else {
-      start = true;
-      canBet = false;
-    }
-  });
-}
+//       if (
+//         confirm(
+//           "You have reached your limit. Do you want to choose a different amount?"
+//         ) == true
+//       ) {
+//         removeBetAmount(betAmount);
+//         updateBetAmount(0);
+//         bankAccount();
+//         console.log(`Arr of chips = { ${chips} }`);
+//       } else canBet = false;
+//     } else {
+//       chips[0].splice(0, 1); //Remove 1 chip from the 10th chips row
+//       updateBetAmount(10);
+//     }
+//     bankAccount();
+//   });
+//   TWENTY_FIVE_CHIP.addEventListener("click", function () {
+//     if (canBet && betAmount > playerBalance) {
+//       console.log(`Player balance is = ${playerBalance}`);
+
+//       if (
+//         confirm(
+//           "You have reached your limit. Do you want to choose a different amount?"
+//         ) == true
+//       ) {
+//         removeBetAmount(betAmount);
+//         updateBetAmount(0);
+//         bankAccount();
+//         console.log(`Arr of chips = { ${chips} }`);
+//       } else canBet = false;
+//     } else {
+//       chips[1].splice(0, 1); //Remove 1 chip from the 25th chips row
+//       updateBetAmount(25);
+//     }
+//     bankAccount();
+//   });
+//   FIFTY_CHIP.addEventListener("click", function () {
+//     if (canBet && betAmount > playerBalance) {
+//       console.log(`Player balance is = ${playerBalance}`);
+
+//       if (
+//         confirm(
+//           "You have reached your limit. Do you want to choose a different amount?"
+//         ) == true
+//       ) {
+//         removeBetAmount(betAmount);
+//         updateBetAmount(0);
+//         bankAccount();
+//         console.log(`Arr of chips = { ${chips} }`);
+//       } else canBet = false;
+//     } else {
+//       chips[2].splice(0, 1); //Remove 1 chip from the 50th chips row
+//       updateBetAmount(50);
+//     }
+//     bankAccount();
+//   });
+//   A_HUNDRED_CHIP.addEventListener("click", function () {
+//     if (canBet && betAmount > playerBalance) {
+//       console.log(`Player balance is = ${playerBalance}`);
+
+//       if (
+//         confirm(
+//           "You have reached your limit. Do you want to choose a different amount?"
+//         ) == true
+//       ) {
+//         removeBetAmount(betAmount);
+//         updateBetAmount(0);
+//         bankAccount();
+//         console.log(`Arr of chips = { ${chips} }`);
+//       }
+//     } else {
+//       chips[3].splice(0, 1); //Remove 1 chip from the 100th chips row
+//       updateBetAmount(100);
+//     }
+//     bankAccount();
+//   });
+//   TWO_HUNDRED_FIFTY_CHIP.addEventListener("click", function () {
+//     if (canBet && betAmount > playerBalance) {
+//       console.log(`Player balance is = ${playerBalance}`);
+
+//       if (
+//         confirm(
+//           "You have reached your limit. Do you want to choose a different amount?"
+//         ) == true
+//       ) {
+//         removeBetAmount(betAmount);
+//         updateBetAmount(0);
+//         bankAccount();
+//         console.log(`Arr of chips = { ${chips} }`);
+//       } else canBet = false;
+//     } else {
+//       chips[4].splice(0, 1); //Remove 1 chip from the 250th chips row
+//       updateBetAmount(250);
+//     }
+//     bankAccount();
+//   });
+//   FIVE_HUNDRED_CHIP.addEventListener("click", function () {
+//     if (canBet && betAmount > playerBalance) {
+//       console.log(`Player balance is = ${playerBalance}`);
+
+//       if (
+//         confirm(
+//           "You have reached your limit. Do you want to choose a different amount?"
+//         ) == true
+//       ) {
+//         removeBetAmount(betAmount);
+//         updateBetAmount(0);
+//         bankAccount();
+//         console.log(`Arr of chips = { ${chips} }`);
+//       } else canBet = false;
+//     } else {
+//       chips[5].splice(0, 1); //Remove 1 chip from the 500th chips row
+//       updateBetAmount(500);
+//     }
+//     bankAccount();
+//   });
+// }
+
+// function removeBetAmount(anAmount) {
+//   switch (anAmount) {
+//     case 10:
+//       chips[0].splice(0, 0, 10); //Add 1 chip back in the 10th chips row
+//       break;
+//     case 25:
+//       chips[1].splice(0, 0, 25);
+//       break;
+//     case 50:
+//       chips[2].splice(0, 0, 50);
+//       break;
+//     case 100:
+//       chips[3].splice(0, 0, 100);
+//       break;
+//     case 250:
+//       chips[4].splice(0, 0, 250);
+//       break;
+//     case 500:
+//       chips[5].splice(0, 0, 500);
+//       break;
+//   }
+// }
 
 export { betAmount, playerBalance, canBet };

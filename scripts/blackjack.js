@@ -39,9 +39,10 @@ menuBtn.addEventListener("click", () => {
 window.onload = function () {
   buildDeck();
   shuffleDeck();
-  console.log(`Current Result is ${results.currentResult}`);
+  BankAccount.buildChipsBank();
+  //console.log(`Current Result is ${results.currentResult}`);
   //restartGame();
-  startGame();
+  //startGame();
   // debugger;
 };
 
@@ -99,17 +100,30 @@ function startGame() {
   BankAccount.bet();
 
   // When the 'play' btn is hit
+  //When player committed their bet amount, the game starts.
+  // document.getElementById("playBtn").addEventListener("click", function () {
+  //   if (betAmount == 0) {
+  //     console.log(
+  //       "You have not bet. Click on the chip for how much you want to bet."
+  //     );
+  //   } else {
+  //     start = true;
+  //     canBet = false;
+  //   }
+  // });
   PLAY_BTN.addEventListener("click", function () {
     if (BankAccount.betAmount == 0) {
       alert(
         "You have not bet. Click on the chip for how much you want to bet."
       );
       start = false;
+      console.log(`Start = ${start}`);
     } else {
       alert(`You have bet ${BankAccount.betAmount} dollars! Let's play!`);
       this.classList.add("hidden"); //Hide the 'play' btn when start playing
       start = true;
-      BankAccount.canBet = false;
+      //BankAccount.canBet = false;
+      console.log(`Can I still bet = ${BankAccount.canBet}`);
       console.log(`Start = ${start}`);
       canHit = true;
       canStay = true;
@@ -281,81 +295,81 @@ function split() {
   }
 }
 
-function restartGame() {
-  //Check for last game's result
-  console.log(
-    `Bet amount is ${BankAccount.betAmount} and Current Result is ${results.currentResult}`
-  );
-  if (results.currentResult == "tie") {
-    switch (BankAccount.betAmount) {
-      case 10:
-        chips[0].splice(0, 1, 10);
-        break;
-      case 25:
-        chips[1].splice(0, 1, 25);
-        break;
-      case 50:
-        chips[2].splice(0, 1, 50);
-        break;
-      case 100:
-        chips[3].splice(0, 1, 100);
-        break;
-      case 250:
-        chips[4].splice(0, 1, 250);
-        break;
-      case 500:
-        chips[5].splice(0, 1, 500);
-        break;
-      default:
-        console.log(chips);
-    }
-  } else if (results.currentResult == "lose") {
-    switch (BankAccount.betAmount) {
-      case 10:
-        chips[0].splice(0, 1);
-        break;
-      case 25:
-        chips[1].splice(0, 1);
-        break;
-      case 50:
-        chips[2].splice(0, 1);
-        break;
-      case 100:
-        chips[3].splice(0, 1);
-        break;
-      case 250:
-        chips[4].splice(0, 1);
-        break;
-      case 500:
-        chips[5].splice(0, 1);
-        break;
-      default:
-    }
-  } else if (results.currentResult == "win") {
-    switch (BankAccount.betAmount) {
-      case 10:
-        chips[0].splice(0, 0, 10);
-        break;
-      case 25:
-        chips[1].splice(0, 0, 25);
-        break;
-      case 50:
-        chips[2].splice(0, 0, 50);
-        break;
-      case 100:
-        chips[3].splice(0, 0, 100);
-        break;
-      case 250:
-        chips[4].splice(0, 0, 250);
-        break;
-      case 500:
-        chips[5].splice(0, 0, 500);
-        break;
-      default:
-    }
-  }
-  //console.log(BankAccount.chips);
-  //if there was no last game, the computer will just run this:
-  //bankAccount();
-  //console.log(bank);
-}
+// function restartGame() {
+//   //Check for last game's result
+//   console.log(
+//     `Bet amount is ${BankAccount.betAmount} and Current Result is ${results.currentResult}`
+//   );
+//   if (results.currentResult == "tie") {
+//     switch (BankAccount.betAmount) {
+//       case 10:
+//         chips[0].splice(0, 1, 10);
+//         break;
+//       case 25:
+//         chips[1].splice(0, 1, 25);
+//         break;
+//       case 50:
+//         chips[2].splice(0, 1, 50);
+//         break;
+//       case 100:
+//         chips[3].splice(0, 1, 100);
+//         break;
+//       case 250:
+//         chips[4].splice(0, 1, 250);
+//         break;
+//       case 500:
+//         chips[5].splice(0, 1, 500);
+//         break;
+//       default:
+//         console.log(chips);
+//     }
+//   } else if (results.currentResult == "lose") {
+//     switch (BankAccount.betAmount) {
+//       case 10:
+//         chips[0].splice(0, 1);
+//         break;
+//       case 25:
+//         chips[1].splice(0, 1);
+//         break;
+//       case 50:
+//         chips[2].splice(0, 1);
+//         break;
+//       case 100:
+//         chips[3].splice(0, 1);
+//         break;
+//       case 250:
+//         chips[4].splice(0, 1);
+//         break;
+//       case 500:
+//         chips[5].splice(0, 1);
+//         break;
+//       default:
+//     }
+//   } else if (results.currentResult == "win") {
+//     switch (BankAccount.betAmount) {
+//       case 10:
+//         chips[0].splice(0, 0, 10);
+//         break;
+//       case 25:
+//         chips[1].splice(0, 0, 25);
+//         break;
+//       case 50:
+//         chips[2].splice(0, 0, 50);
+//         break;
+//       case 100:
+//         chips[3].splice(0, 0, 100);
+//         break;
+//       case 250:
+//         chips[4].splice(0, 0, 250);
+//         break;
+//       case 500:
+//         chips[5].splice(0, 0, 500);
+//         break;
+//       default:
+//     }
+//   }
+//   //console.log(BankAccount.chips);
+//   //if there was no last game, the computer will just run this:
+//   //bankAccount();
+//   //console.log(bank);
+// }

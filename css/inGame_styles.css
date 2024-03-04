@@ -268,23 +268,75 @@ div > img {
   display: none;
 }
 
-.chips {
+#bettingTable {
   position: absolute;
   top: 60%;
   left: 10%;
   height: -moz-max-content;
   height: max-content;
   width: 300px;
-  grid-template-columns: 100px 100px 100px;
-  grid-template-rows: auto auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto auto auto;
+  gap: 10px;
 }
 
-.chips > div > button {
-  border-radius: 10%;
-  color: #fff;
-  font-size: 1.4rem;
-  padding: 10px;
-} 
+#tenChips {
+  grid-area: 1/1;
+}
+
+#twentyFiveChips {
+  grid-area: 2/1;
+}
+
+#fiftyChips {
+  grid-area: 3/1;
+}
+
+#oneHundredChips {
+  grid-area: 4/1;
+}
+
+#bettingTable > div {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+}
+
+#bettingTable > div > * {
+  box-sizing: border-box;
+  border-radius: 2.5rem;
+  box-shadow: 5px 10px rgba(0, 0, 0, 0.5411764706);
+  height: 80px;
+  width: 80px;
+  grid-area: 1/1;
+}
+
+.firstChip {
+  margin-left: 0px;
+  z-index: 10;
+}
+
+.secondChip {
+  margin-left: 40px;
+  z-index: 9;
+}
+
+.thirdChip {
+  margin-left: 80px;
+  z-index: 8;
+}
+
+.fourthChip {
+  margin-left: 120px;
+  z-index: 7;
+}
+
+.fifthChip {
+  margin-left: 160px;
+  z-index: 6;
+}
+
 #results {
   border-radius: 5px;
   color: #d1df7e;
