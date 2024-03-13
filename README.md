@@ -1,3 +1,5 @@
+Inspired by ImKennyYip/black-jack
+
 # [Black Jack](https://youtu.be/bMYCWccL-3U)
 Coding Tutorial: https://youtu.be/bMYCWccL-3U
 
