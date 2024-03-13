@@ -1,8 +1,8 @@
 Inspired by ImKennyYip/black-jack
 
-# [Black Jack](https://youtu.be/bMYCWccL-3U)
-Coding Tutorial: https://youtu.be/bMYCWccL-3U
+Experience the thrill of Blackjack – a timeless card game where the aim is to reach 21 without busting! 
+Place your bets and challenge the computerized dealer for a shot at victory.
 
-In this tutorial, you will learn how to make the card game, black jack! You will learn how to create a deck, shuffle it, and deal cards to the dealer and the player. You will also learn to hit (draw cards) and stay (submit your hand) and compare the results to see who wins the round.
 
-![black-jack-preview](https://user-images.githubusercontent.com/78777681/163043266-b2232ed5-23e6-4550-9ed1-809c68ffa96b.png)
+![Screenshot 2024-03-12 215830](https://github.com/ThanhNG30/My-Black-Jack-Game/assets/99703329/cf5a6fa1-0799-4389-9f75-65686ff41a4a)
+![Screenshot 2024-03-12 215646](https://github.com/ThanhNG30/My-Black-Jack-Game/assets/99703329/83cad68a-8f0b-4aa9-aa52-2a96a697e5b8)
